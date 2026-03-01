@@ -1,0 +1,41 @@
+/* File: src/styles/custom.css */
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: #f8fafc; 
+    overscroll-behavior-y: none; 
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+/* Tab Navigation Styles */
+.tab-btn { position: relative; padding-bottom: 2px; transition: all 0.2s; }
+.tab-active { color: #ffffff; font-weight: 600; border-bottom: 3px solid #fbbf24; }
+.tab-inactive { color: #bfdbfe; border-bottom: 3px solid transparent; }
+.tab-inactive:hover { color: #ffffff; }
+
+/* Utility Classes */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Edit Mode Inputs */
+.edit-input { 
+    width: 100%; 
+    padding: 4px; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 4px; 
+    font-size: 0.875rem; 
+    color: #334155; 
+}
+.edit-input:focus { 
+    outline: none; 
+    border-color: #3b82f6; 
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); 
+}
+
+/* Table Shadows */
+.sticky-col-shadow { box-shadow: 2px 0 5px -2px rgba(0,0,0,0.1); }
