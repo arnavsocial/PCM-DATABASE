@@ -446,6 +446,9 @@ const CollegeApp = () => {
 };
 
 // --- APP INITIALIZER ---
+// Mounts the app immediately so Babel can render it on GitHub Pages
 const rootElement = document.getElementById('root');
-const root = ReactDOM.createRoot(rootElement);
-root.render(<CollegeApp />);
+if (rootElement) {
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<CollegeApp />);
+}
