@@ -446,13 +446,6 @@ const CollegeApp = () => {
 };
 
 // --- APP INITIALIZER ---
-// Mounts the React App to the DOM once the HTML is ready
-window.addEventListener('DOMContentLoaded', () => {
-    const rootElement = document.getElementById('root');
-    if (rootElement) {
-        const root = ReactDOM.createRoot(rootElement);
-        root.render(<CollegeApp />);
-    } else {
-        console.error("Could not find the 'root' element in index.html");
-    }
-});
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement);
+root.render(<CollegeApp />);
