@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam and College Database 2026</title>
+    <title>College Database 2026</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
+    
     <style>
         .tab-active { border-bottom: 4px solid white; font-weight: 700; color: white; }
         .tab-inactive { color: #bfdbfe; }
-        .tab-inactive:hover { color: white; }
         .edit-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 4px; padding: 2px 4px; color: black; }
         .sticky-col-shadow { box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1); }
-        .mobile-scroll-x::-webkit-scrollbar { height: 6px; }
-        .mobile-scroll-x::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -30,6 +25,464 @@
     <script src="engExams.js"></script>
     <script src="mgmtExams.js"></script>
 
-    <script type="text/babel" src="CollegeApp.js"></script>
+    <script type="text/babel">
+        // UNCOMMENTED THIS LINE: React hooks are required!
+        const { useState, useEffect } = React;
+
+        // --- ICONS ---
+        const IconGithub = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.011-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.218.694.825.576C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12"/></svg>;
+        const IconEdit = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>;
+        const IconCheck = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>;
+        const IconDownload = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>;
+        const IconSearch = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>;
+        const IconBuilding = () => <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>;
+        const IconTrending = () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>;
+        const IconStar = () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
+        const IconGmail = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819v-5.818l-5.455 3.455-5.455-3.455v5.818h-3.818c-.904 0-1.636-.732-1.636-1.636v-13.909c0-.228.062-.44.174-.627l8.736 5.345 8.735-5.345c.113.187.175.399.175.627zm-12.062 3.659l-10.707-6.551c.321-.362.793-.565 1.297-.565h18.945c.504 0 .976.203 1.297.565l-10.832 6.551z"/></svg>;
+        const IconInstagram = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>;
+
+        // --- MAIN APP COMPONENT ---
+        const CollegeApp = () => {
+            const [activeTab, setActiveTab] = useState('eng'); 
+            const [search, setSearch] = useState('');
+            const [isEditMode, setIsEditMode] = useState(false);
+            
+            const [currentDate, setCurrentDate] = useState(new Date());
+
+            useEffect(() => {
+                const timer = setInterval(() => setCurrentDate(new Date()), 60000);
+                return () => clearInterval(timer);
+            }, []);
+
+            // Pulls from your global data files
+            const [engData, setEngData] = useState(initialEngData);
+            const [mgmtData, setMgmtData] = useState(initialMgmtData);
+            const [engExamData, setEngExamData] = useState(initialEngExams);
+            const [mgmtExamData, setMgmtExamData] = useState(initialMgmtExams);
+
+            const updateEng = (id, field, val) => {
+                setEngData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+            };
+            const updateMgmt = (id, field, val) => {
+                setMgmtData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+            };
+            const updateExam = (id, type, field, val) => {
+                if(type === 'eng') setEngExamData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+                else setMgmtExamData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+            };
+
+            const filterList = (list) => {
+                if (!list) return [];
+                const s = search.toLowerCase();
+                return list.filter(item => {
+                    const nameMatch = item.name && item.name.toLowerCase().includes(s);
+                    const locMatch = item.location && item.location.toLowerCase().includes(s);
+                    const entMatch = item.entrance && item.entrance.toLowerCase().includes(s);
+                    const noteMatch = item.notes && item.notes.toLowerCase().includes(s);
+                    return nameMatch || locMatch || entMatch || noteMatch;
+                });
+            };
+
+            const formatCurrency = (val) => val ? `₹${val} L` : 'N/A';
+            const formatPkg = (val) => val ? `₹${val} LPA` : 'N/A';
+            
+            const sortColleges = (colleges) => {
+                return [...colleges].sort((a, b) => (b.popScore || 0) - (a.popScore || 0));
+            };
+
+            const getLiveStatus = (exam) => {
+                const today = new Date(currentDate); 
+                const start = new Date(exam.regStart);
+                const end = new Date(exam.regEnd);
+                
+                today.setHours(0,0,0,0);
+                start.setHours(0,0,0,0);
+                end.setHours(0,0,0,0);
+
+                const msPerDay = 1000 * 60 * 60 * 24;
+                const diffTime = end.getTime() - today.getTime();
+                const diffDays = Math.ceil(diffTime / msPerDay);
+
+                if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+                    return { label: "Date Error", color: "bg-gray-100", priority: 5 };
+                }
+
+                if (today >= start && diffDays >= 0 && diffDays <= 10) {
+                    return { label: `Closing in ${diffDays} Days`, color: 'bg-red-100 text-red-700 border border-red-200', priority: 1 };
+                }
+
+                if (today > end) {
+                     return { label: `Closed on ${exam.regEnd}`, color: 'bg-gray-200 text-gray-600 border border-gray-300', priority: 4 };
+                }
+
+                if (today >= start && today <= end) {
+                    return { label: `Opened on ${exam.regStart}`, color: 'bg-green-100 text-green-700 border border-green-200', priority: 2 };
+                }
+
+                if (today < start) {
+                    return { label: `Opens on ${exam.regStart}`, color: 'bg-blue-100 text-blue-700 border border-blue-200', priority: 3 };
+                }
+
+                return { label: "Unknown", color: "bg-gray-100", priority: 5 };
+            };
+
+            const sortExams = (exams) => {
+                return [...exams].sort((a, b) => {
+                    const statA = getLiveStatus(a);
+                    const statB = getLiveStatus(b);
+                    if (statA.priority !== statB.priority) {
+                        return statA.priority - statB.priority;
+                    }
+                    const dateA = new Date(a.regEnd);
+                    const dateB = new Date(b.regEnd);
+                    return dateA - dateB;
+                });
+            };
+
+            const renderEngTable = () => (
+                <div className="overflow-x-auto min-h-[500px] mobile-scroll-x">
+                    <table className="w-full text-left border-collapse min-w-[800px] md:min-w-full">
+                        <thead>
+                            <tr className="bg-gray-50 text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
+                                <th className="p-2 md:p-4 font-bold sticky left-0 bg-gray-50 z-10 w-10 md:w-12 sticky-col-shadow md:shadow-none">#</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[160px] md:min-w-[200px]">College Name</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[140px]">Entrance / Reg</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Fees (4Y)</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Avg Pkg</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center bg-blue-50">Val</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center bg-green-50">Pop</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[150px]">Location & Tier</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[200px] md:min-w-[250px]">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody className="text-sm divide-y divide-gray-100">
+                            {sortColleges(filterList(engData)).map((col, index) => (
+                                <tr key={col.id} className="hover:bg-blue-50 transition-colors duration-150">
+                                    <td className="p-2 md:p-4 font-medium text-gray-500 sticky left-0 bg-white hover:bg-blue-50 z-10 sticky-col-shadow md:shadow-none">{index + 1}</td>
+                                    <td className="p-2 md:p-4">
+                                        <div className="font-bold text-gray-900 text-sm md:text-base">
+                                            {isEditMode ? <input className="edit-input" value={col.name || ''} onChange={e => updateEng(col.id, 'name', e.target.value)} /> : col.name}
+                                        </div>
+                                        <div className="text-xs text-blue-600 font-semibold mt-1">
+                                            {isEditMode ? <input className="edit-input w-16" value={col.collegeTier || ''} onChange={e => updateEng(col.id, 'collegeTier', e.target.value)} /> : col.collegeTier}
+                                        </div>
+                                    </td>
+                                    <td className="p-2 md:p-4">
+                                        <div className="font-semibold text-blue-700 text-xs md:text-sm">
+                                            {isEditMode ? <input className="edit-input" value={col.entrance || ''} onChange={e => updateEng(col.id, 'entrance', e.target.value)} /> : col.entrance}
+                                        </div>
+                                        <div className="text-[10px] md:text-xs text-gray-500 mt-1 whitespace-nowrap">
+                                             {isEditMode ? <input className="edit-input" value={col.regDetails || ''} onChange={e => updateEng(col.id, 'regDetails', e.target.value)} /> : col.regDetails}
+                                        </div>
+                                    </td>
+                                    <td className="p-2 md:p-4 text-right font-medium text-red-600 whitespace-nowrap">
+                                        {isEditMode ? <input className="edit-input text-right" value={col.fees || ''} onChange={e => updateEng(col.id, 'fees', e.target.value)} /> : formatCurrency(col.fees)}
+                                    </td>
+                                    <td className="p-2 md:p-4 text-right font-bold text-green-700 whitespace-nowrap">
+                                        {isEditMode ? <input className="edit-input text-right" value={col.package || ''} onChange={e => updateEng(col.id, 'package', e.target.value)} /> : formatPkg(col.package)}
+                                    </td>
+                                    <td className="p-2 md:p-4 text-center bg-blue-50/50">
+                                        <span className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold ${col.valScore >= 90 ? 'bg-blue-200 text-blue-800' : 'bg-gray-200 text-gray-800'}`}>
+                                            {col.valScore || '-'}
+                                        </span>
+                                    </td>
+                                    <td className="p-2 md:p-4 text-center bg-green-50/50">
+                                        <span className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold ${col.popScore >= 90 ? 'bg-green-200 text-green-800' : 'bg-gray-200 text-gray-800'}`}>
+                                            {col.popScore || '-'}
+                                        </span>
+                                    </td>
+                                    <td className="p-2 md:p-4">
+                                        <div className="text-gray-900 font-medium text-xs md:text-sm">
+                                             {isEditMode ? <input className="edit-input" value={col.location || ''} onChange={e => updateEng(col.id, 'location', e.target.value)} /> : col.location}
+                                        </div>
+                                        <div className="text-[10px] md:text-xs text-gray-500 mt-1 whitespace-nowrap">
+                                            Tier {isEditMode ? <input className="edit-input w-8" value={col.cityTier || ''} onChange={e => updateEng(col.id, 'cityTier', e.target.value)} /> : col.cityTier}
+                                        </div>
+                                    </td>
+                                    <td className="p-2 md:p-4 text-gray-600 italic border-l border-gray-100 text-xs md:text-sm min-w-[200px]">
+                                         {isEditMode ? <input className="edit-input" value={col.notes || ''} onChange={e => updateEng(col.id, 'notes', e.target.value)} /> : `"${col.notes}"`}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    {filterList(engData).length === 0 && <div className="p-8 text-center text-gray-500">No matching colleges found.</div>}
+                </div>
+            );
+
+            const renderMgmtTable = () => (
+                <div className="overflow-x-auto min-h-[500px] mobile-scroll-x">
+                    <table className="w-full text-left border-collapse min-w-[800px] md:min-w-full">
+                         <thead>
+                            <tr className="bg-gray-50 text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
+                                <th className="p-2 md:p-4 font-bold sticky left-0 bg-gray-50 z-10 w-10 md:w-12 sticky-col-shadow md:shadow-none">#</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[160px] md:min-w-[200px]">College Name</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[140px]">Entrance / Reg</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Fees (3Y)</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Avg Pkg</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center bg-blue-50">Val</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center bg-green-50">Pop</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[150px]">Location & Tier</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[200px] md:min-w-[250px]">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody className="text-sm divide-y divide-gray-100">
+                            {sortColleges(filterList(mgmtData)).map((col, index) => (
+                                <tr key={col.id} className="hover:bg-blue-50 transition-colors duration-150">
+                                    <td className="p-2 md:p-4 font-medium text-gray-500 sticky left-0 bg-white hover:bg-blue-50 z-10 sticky-col-shadow md:shadow-none">{index + 1}</td>
+                                    <td className="p-2 md:p-4">
+                                        <div className="font-bold text-gray-900 text-sm md:text-base">
+                                            {isEditMode ? <input className="edit-input" value={col.name || ''} onChange={e => updateMgmt(col.id, 'name', e.target.value)} /> : col.name}
+                                        </div>
+                                        <div className="text-xs text-blue-600 font-semibold mt-1">
+                                            {isEditMode ? <input className="edit-input w-16" value={col.collegeTier || ''} onChange={e => updateMgmt(col.id, 'collegeTier', e.target.value)} /> : col.collegeTier}
+                                        </div>
+                                    </td>
+                                    <td className="p-2 md:p-4">
+                                        <div className="font-semibold text-blue-700 text-xs md:text-sm">
+                                            {isEditMode ? <input className="edit-input" value={col.entrance || ''} onChange={e => updateMgmt(col.id, 'entrance', e.target.value)} /> : col.entrance}
+                                        </div>
+                                        <div className="text-[10px] md:text-xs text-gray-500 mt-1 whitespace-nowrap">
+                                             {isEditMode ? <input className="edit-input" value={col.regDetails || ''} onChange={e => updateMgmt(col.id, 'regDetails', e.target.value)} /> : col.regDetails}
+                                        </div>
+                                    </td>
+                                    <td className="p-2 md:p-4 text-right font-medium text-red-600 whitespace-nowrap">
+                                        {isEditMode ? <input className="edit-input text-right" value={col.fees || ''} onChange={e => updateMgmt(col.id, 'fees', e.target.value)} /> : formatCurrency(col.fees)}
+                                    </td>
+                                    <td className="p-2 md:p-4 text-right font-bold text-green-700 whitespace-nowrap">
+                                        {isEditMode ? <input className="edit-input text-right" value={col.package || ''} onChange={e => updateMgmt(col.id, 'package', e.target.value)} /> : formatPkg(col.package)}
+                                    </td>
+                                    <td className="p-2 md:p-4 text-center bg-blue-50/50">
+                                        <span className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold ${col.valScore >= 90 ? 'bg-blue-200 text-blue-800' : 'bg-gray-200 text-gray-800'}`}>
+                                            {col.valScore || '-'}
+                                        </span>
+                                    </td>
+                                    <td className="p-2 md:p-4 text-center bg-green-50/50">
+                                        <span className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold ${col.popScore >= 90 ? 'bg-green-200 text-green-800' : 'bg-gray-200 text-gray-800'}`}>
+                                            {col.popScore || '-'}
+                                        </span>
+                                    </td>
+                                    <td className="p-2 md:p-4">
+                                        <div className="text-gray-900 font-medium text-xs md:text-sm">
+                                             {isEditMode ? <input className="edit-input" value={col.location || ''} onChange={e => updateMgmt(col.id, 'location', e.target.value)} /> : col.location}
+                                        </div>
+                                        <div className="text-[10px] md:text-xs text-gray-500 mt-1 whitespace-nowrap">
+                                            Tier {isEditMode ? <input className="edit-input w-8" value={col.cityTier || ''} onChange={e => updateMgmt(col.id, 'cityTier', e.target.value)} /> : col.cityTier}
+                                        </div>
+                                    </td>
+                                    <td className="p-2 md:p-4 text-gray-600 italic border-l border-gray-100 text-xs md:text-sm min-w-[200px]">
+                                         {isEditMode ? <input className="edit-input" value={col.notes || ''} onChange={e => updateMgmt(col.id, 'notes', e.target.value)} /> : `"${col.notes}"`}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            );
+
+            const renderExamTable = (data, type) => {
+                const filtered = filterList(data);
+                const sorted = sortExams(filtered);
+                const displayDate = currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+                return (
+                    <div className="overflow-x-auto bg-white rounded-lg border border-gray-200 mobile-scroll-x">
+                        <table className="w-full text-left text-sm min-w-[600px] md:min-w-full">
+                            <thead className="bg-gray-50 text-gray-600 font-semibold border-b">
+                                <tr>
+                                    <th className="p-3 md:p-4">Live Status ({displayDate})</th>
+                                    <th className="p-3 md:p-4">Exam Name</th>
+                                    <th className="p-3 md:p-4">Reg Start</th>
+                                    <th className="p-3 md:p-4">Reg End</th>
+                                    <th className="p-3 md:p-4">Exam Date</th>
+                                    <th className="p-3 md:p-4">Link</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-100">
+                                {sorted.map((ex) => {
+                                    const statusDetails = getLiveStatus(ex);
+                                    
+                                    return (
+                                        <tr key={ex.id} className="hover:bg-gray-50">
+                                            <td className="p-3 md:p-4">
+                                                <span className={`px-2 py-1 rounded-md text-[10px] md:text-xs font-bold border-0 whitespace-nowrap ${statusDetails.color}`}>
+                                                    {statusDetails.label}
+                                                </span>
+                                            </td>
+                                            <td className="p-3 md:p-4 font-medium text-gray-900 text-sm md:text-base">
+                                                {isEditMode ? <input className="edit-input" value={ex.name || ''} onChange={e => updateExam(ex.id, type, 'name', e.target.value)} /> : ex.name}
+                                            </td>
+                                            <td className="p-3 md:p-4 text-gray-500 font-medium text-xs md:text-sm whitespace-nowrap">
+                                                {isEditMode ? <input className="edit-input" value={ex.regStart || ''} onChange={e => updateExam(ex.id, type, 'regStart', e.target.value)} /> : ex.regStart}
+                                            </td>
+                                            <td className="p-3 md:p-4 text-gray-800 font-semibold text-xs md:text-sm whitespace-nowrap">
+                                                {isEditMode ? <input className="edit-input" value={ex.regEnd || ''} onChange={e => updateExam(ex.id, type, 'regEnd', e.target.value)} /> : ex.regEnd}
+                                            </td>
+                                            <td className="p-3 md:p-4 text-gray-600 text-xs md:text-sm whitespace-nowrap">
+                                                {isEditMode ? <input className="edit-input" value={ex.examDate || ''} onChange={e => updateExam(ex.id, type, 'examDate', e.target.value)} /> : ex.examDate}
+                                            </td>
+                                            <td className="p-3 md:p-4 text-blue-500 hover:underline text-xs md:text-sm">
+                                                {isEditMode ? <input className="edit-input" value={ex.link || ''} onChange={e => updateExam(ex.id, type, 'link', e.target.value)} /> : <a href={`https://${ex.link}`} target="_blank" rel="noreferrer">Website</a>}
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                );
+            };
+
+            const downloadCSV = () => {
+                let data, headers, filename;
+                if(activeTab === 'eng') {
+                    data = sortColleges(engData);
+                    headers = "Rank,Name,Entrance,RegDetails,Fees,AvgPkg,ValScore,PopScore,Location,Tier,Notes";
+                    filename = "Engineering_Colleges_2026.csv";
+                } else if(activeTab === 'mgmt') {
+                    data = sortColleges(mgmtData);
+                    headers = "Rank,Name,Entrance,RegDetails,Fees,AvgPkg,ValScore,PopScore,Location,Tier,Notes";
+                    filename = "Management_Colleges_2026.csv";
+                } else {
+                    alert("Switch to a College Tab to download data.");
+                    return;
+                }
+
+                const csv = [
+                    headers,
+                    ...data.map((item, index) => {
+                         return `${index + 1},"${item.name}","${item.entrance}","${item.regDetails}",${item.fees},${item.package},${item.valScore},${item.popScore},"${item.location}","${item.collegeTier}","${item.notes}"`;
+                    })
+                ].join("\n");
+
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+            };
+
+            return (
+                <div className="min-h-screen p-2 md:p-6 font-sans text-gray-800 bg-[#f8fafc]">
+                    <div className="max-w-7xl mx-auto bg-white shadow-xl rounded-none md:rounded-xl overflow-hidden border border-gray-200">
+                        
+                        {/* Header: Blue Style */}
+                        <div className="bg-blue-900 text-white p-4 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div className="w-full md:w-auto">
+                                <h1 className="text-xl md:text-3xl font-bold flex items-center gap-2">
+                                    <IconBuilding />
+                                    Exam and College Database
+                                </h1>
+                                <p className="text-blue-200 mt-2 text-xs md:text-sm">
+                                    Database for Top Private Colleges and Exams in ONE Place. Updated for 2026.
+                                </p>
+                            </div>
+                            <div className="flex flex-wrap gap-3 items-center w-full md:w-auto justify-between md:justify-end">
+                                {/* Social Buttons */}
+                                <div className="flex gap-4 mr-2">
+                                    <a href="https://www.instagram.com/arnavsocial/" className="text-white hover:text-gray-300 transition-colors" title="Instagram">
+                                        <IconInstagram />
+                                    </a>
+                                    <a href="https://github.com/arnavsocial" className="text-white hover:text-gray-300 transition-colors" title="GitHub">
+                                        <IconGithub />
+                                    </a>
+                                    <a href="https://www.potato.com" target="_blank" className="text-white hover:text-gray-300 transition-colors" title="Gmail">
+                                        <IconGmail />
+                                    </a>
+                                </div>
+
+                                <div className="flex gap-2">
+                                    <button 
+                                        onClick={() => setIsEditMode(!isEditMode)} 
+                                        className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-medium transition-colors ${isEditMode ? 'bg-amber-400 text-amber-900 border-none' : 'bg-blue-800 text-blue-100 hover:bg-blue-700 border border-blue-700'}`}
+                                    >
+                                        {isEditMode ? <><IconCheck /> Done</> : <><IconEdit /> Edit</>}
+                                    </button>
+                                    <button 
+                                        onClick={downloadCSV}
+                                        className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-1.5 px-3 md:py-2 md:px-4 text-sm md:text-base rounded-lg shadow-lg transition-colors duration-200"
+                                    >
+                                        <IconDownload /> CSV
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Navigation Tabs */}
+                        <div className="bg-blue-800 px-2 md:px-6 flex gap-4 text-sm overflow-x-auto no-scrollbar">
+                            <button onClick={() => setActiveTab('eng')} className={`py-3 px-2 whitespace-nowrap transition-colors flex-shrink-0 ${activeTab==='eng' ? 'tab-active' : 'tab-inactive'}`}>
+                                Engineering Colleges
+                            </button>
+                            <button onClick={() => setActiveTab('mgmt')} className={`py-3 px-2 whitespace-nowrap transition-colors flex-shrink-0 ${activeTab==='mgmt' ? 'tab-active' : 'tab-inactive'}`}>
+                                Management Colleges
+                            </button>
+                            <button onClick={() => setActiveTab('examEng')} className={`py-3 px-2 whitespace-nowrap transition-colors flex-shrink-0 ${activeTab==='examEng' ? 'tab-active' : 'tab-inactive'}`}>
+                                Exams (Engg)
+                            </button>
+                            <button onClick={() => setActiveTab('examMgmt')} className={`py-3 px-2 whitespace-nowrap transition-colors flex-shrink-0 ${activeTab==='examMgmt' ? 'tab-active' : 'tab-inactive'}`}>
+                                Exams (Mgmt)
+                            </button>
+                        </div>
+
+                        {/* Controls & Search */}
+                        <div className="p-4 bg-gray-100 border-b border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div className="relative w-full md:w-1/3">
+                                <span className="absolute left-3 top-2.5 h-5 w-5 text-gray-400">
+                                    <IconSearch />
+                                </span>
+                                <input
+                                    type="text"
+                                    placeholder={activeTab.includes('exam') ? "Search Exams..." : "Search Colleges..."}
+                                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base"
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
+                            </div>
+                            
+                             <div className="flex gap-2 w-full md:w-auto justify-center md:justify-end">
+                                {(activeTab === 'eng' || activeTab === 'mgmt') && (
+                                    <div className="flex gap-4 text-xs text-gray-600 items-center">
+                                        <div className="flex items-center gap-1"><span className="text-amber-500"><IconStar /></span> <span>Tier 1</span></div>
+                                        <div className="flex items-center gap-1"><span className="text-blue-500"><IconTrending /></span> <span>Value &gt; 90</span></div>
+                                    </div>
+                                )}
+                                {(activeTab === 'examEng' || activeTab === 'examMgmt') && (
+                                    <div className="flex gap-3 text-[10px] md:text-xs text-gray-600 items-center">
+                                        <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500"></span> <span>Closing Soon</span></div>
+                                        <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-500"></span> <span>Open</span></div>
+                                        <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-500"></span> <span>Upcoming</span></div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Content Area */}
+                        <div className="bg-white">
+                            {activeTab === 'eng' && renderEngTable()}
+                            {activeTab === 'mgmt' && renderMgmtTable()}
+                            {activeTab === 'examEng' && renderExamTable(engExamData, 'eng')}
+                            {activeTab === 'examMgmt' && renderExamTable(mgmtExamData, 'mgmt')}
+                        </div>
+                        
+                        <div className="p-4 bg-gray-100 text-center text-[10px] md:text-xs text-gray-500 border-t border-gray-200">
+                            *Data is generally accurate but may contain minor inaccuracies. This is a baseline reference only.
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- APP INITIALIZER ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const rootElement = document.getElementById('root');
+            if (rootElement) {
+                const root = ReactDOM.createRoot(rootElement);
+                root.render(<CollegeApp />);
+            } else {
+                console.error("Could not find the 'root' element in index.html");
+            }
+        });
+    </script>
 </body>
 </html>
