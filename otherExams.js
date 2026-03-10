@@ -54,5 +54,7 @@ const initialOtherExams = [
     { id: 43, name: "CG PET", regStart: "Mar 02, 2026", regEnd: "Mar 27, 2026", examDate: "May 2026", link: "vyapam.cgstate.gov.in" },
     { id: 44, name: "MP PAT", regStart: "Apr 25, 2026", regEnd: "May 15, 2026", examDate: "Jun 2026", link: "vyapam.mp.gov.in" },
     { id: 45, name: "SAAT", regStart: "Dec 07, 2025", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "admission.soa.ac.in" },
-    { id: 31, name: "FDDI AIST 2026", regStart: "Jan 01, 2026", regEnd: "Apr 20, 2026", examDate: "-", link: "fddiindia.com" }
+    { id: 31, name: "FDDI AIST 2026", regStart: "Jan 01, 2026", regEnd: "Apr 20, 2026", examDate: "-", link: "fddiindia.com" },
+    { id: 32, name: "AICEE 2026", regStart: "Oct 20, 2025", regEnd: "Apr 10, 2026", examDate: "-", link: "aicee.net" },
+    { id: 33, name: "PERA CET 2026", regStart: "Jun 03, 2026", regEnd: "Jun 25, 2026", examDate: "-", link: "peracets.com" }
 ];
