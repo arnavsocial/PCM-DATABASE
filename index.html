@@ -2,26 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam and College Database 2026</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="src/styles/custom.css">
+    <style>
+        .tab-active { border-bottom: 4px solid white; font-weight: 700; color: white; }
+        .tab-inactive { color: #bfdbfe; }
+        .tab-inactive:hover { color: white; }
+        .edit-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 4px; padding: 2px 4px; color: black; }
+        .sticky-col-shadow { box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1); }
+        .mobile-scroll-x::-webkit-scrollbar { height: 6px; }
+        .mobile-scroll-x::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body>
     <div id="root"></div>
 
-    <script src="src/js/data/engData.js"></script>
-    <script src="src/js/data/mgmtData.js"></script>
-    <script src="src/js/data/engExams.js"></script>
-    <script src="src/js/data/mgmtExams.js"></script>
+    <script src="engData.js"></script>
+    <script src="mgmtData.js"></script>
+    <script src="engExams.js"></script>
+    <script src="mgmtExams.js"></script>
 
-    <script type="text/babel" src="src/js/components/CollegeApp.js"></script>
+    <script type="text/babel" src="CollegeApp.js"></script>
 </body>
 </html>
