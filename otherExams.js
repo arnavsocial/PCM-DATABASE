@@ -1,7 +1,6 @@
 const initialOtherExams = [
     // 1. Medical, Pharmacy & Paramedical
     { id: 1, name: "NEET UG", regStart: "Feb 08, 2026", regEnd: "Mar 11, 2026", examDate: "May 2026", link: "neet.nta.nic.in" },
-    { id: 2, name: "AIIMS MBBS", regStart: "Via NEET", regEnd: "Via NEET", examDate: "May 2026", link: "neet.nta.nic.in" },
     { id: 3, name: "B.Pharm (NEET/State)", regStart: "Varies", regEnd: "Varies", examDate: "May-Jun 2026", link: "State Portals" },
     { id: 4, name: "MP PNST", regStart: "Mar 01, 2026", regEnd: "May 31, 2026", examDate: "Jun 2026", link: "mponline.gov.in" },
     { id: 5, name: "CG Paramedical", regStart: "Mar 01, 2026", regEnd: "Mar 31, 2026", examDate: "May 2026", link: "vyapam.cgstate.gov.in" },
@@ -26,7 +25,6 @@ const initialOtherExams = [
     { id: 18, name: "LSAT India", regStart: "Dec 01, 2025", regEnd: "Mar 31, 2026", examDate: "Jan-May 2026", link: "lsac.org" },
 
     // 5. Management & Commerce
-    { id: 19, name: "DU JAT", regStart: "Via CUET", regEnd: "Via CUET", examDate: "May 2026", link: "du.ac.in" },
     { id: 20, name: "CA Foundation", regStart: "Open", regEnd: "Jan 31, 2026", examDate: "May-Jun 2026", link: "icai.org" },
     { id: 21, name: "CS Foundation", regStart: "Open", regEnd: "Feb 28, 2026", examDate: "Jun 2026", link: "icsi.edu" },
     { id: 22, name: "CMA Foundation", regStart: "Open", regEnd: "Jan 31, 2026", examDate: "Jun 2026", link: "icmai.in" },
@@ -42,7 +40,6 @@ const initialOtherExams = [
 
     // 7. General UG & Miscellaneous
     { id: 30, name: "NCET 2026", regStart: "Feb 12, 2026", regEnd: "Mar 10, 2026", examDate: "Apr 2026", link: "nta.ac.in" },
-    { id: 31, name: "BHU UET", regStart: "Via CUET", regEnd: "Via CUET", examDate: "May 2026", link: "bhuonline.in" },
     { id: 32, name: "TISS BAT", regStart: "Jan 03, 2026", regEnd: "Mar 10, 2026", examDate: "Apr 2026", link: "tiss.edu" },
     { id: 33, name: "NCHMCT JEE", regStart: "Feb 01, 2026", regEnd: "Mar 25, 2026", examDate: "Apr 2026", link: "exams.nta.nic.in" },
     { id: 34, name: "IIMC Entrance Exam", regStart: "Feb 01, 2026", regEnd: "Feb 10, 2026", examDate: "Mar-Apr 2026", link: "iimc.gov.in" },
