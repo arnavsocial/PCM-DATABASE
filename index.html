@@ -15,6 +15,8 @@
         .tab-inactive { color: #bfdbfe; }
         .edit-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 4px; padding: 2px 4px; color: black; }
         .sticky-col-shadow { box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1); }
+        .mobile-scroll-x::-webkit-scrollbar { height: 6px; }
+        .mobile-scroll-x::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -26,7 +28,6 @@
     <script src="mgmtExams.js"></script>
 
     <script type="text/babel">
-        // UNCOMMENTED THIS LINE: React hooks are required!
         const { useState, useEffect } = React;
 
         // --- ICONS ---
@@ -55,10 +56,10 @@
             }, []);
 
             // Pulls from your global data files
-            const [engData, setEngData] = useState(initialEngData);
-            const [mgmtData, setMgmtData] = useState(initialMgmtData);
-            const [engExamData, setEngExamData] = useState(initialEngExams);
-            const [mgmtExamData, setMgmtExamData] = useState(initialMgmtExams);
+            const [engData, setEngData] = useState(typeof initialEngData !== 'undefined' ? initialEngData : []);
+            const [mgmtData, setMgmtData] = useState(typeof initialMgmtData !== 'undefined' ? initialMgmtData : []);
+            const [engExamData, setEngExamData] = useState(typeof initialEngExams !== 'undefined' ? initialEngExams : []);
+            const [mgmtExamData, setMgmtExamData] = useState(typeof initialMgmtExams !== 'undefined' ? initialMgmtExams : []);
 
             const updateEng = (id, field, val) => {
                 setEngData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
@@ -473,16 +474,14 @@
             );
         };
 
-        // --- APP INITIALIZER ---
-        window.addEventListener('DOMContentLoaded', () => {
-            const rootElement = document.getElementById('root');
-            if (rootElement) {
-                const root = ReactDOM.createRoot(rootElement);
-                root.render(<CollegeApp />);
-            } else {
-                console.error("Could not find the 'root' element in index.html");
-            }
-        });
+        // Render Immediately (Bypassing DOMContentLoaded)
+        const rootElement = document.getElementById('root');
+        if (rootElement) {
+            const root = ReactDOM.createRoot(rootElement);
+            root.render(<CollegeApp />);
+        } else {
+            console.error("Could not find the 'root' element in index.html");
+        }
     </script>
 </body>
 </html>
