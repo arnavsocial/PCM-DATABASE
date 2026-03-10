@@ -25,5 +25,8 @@ const initialEngExams = [
     { id: 24, name: "MET 2026 (Phase 2)", regStart: "Mar 01, 2026", regEnd: "Apr 15, 2026", examDate: "May 23-24, 2026", link: "manipal.edu" },
     { id: 25, name: "IITM BS Qualifier (Jan Session)", regStart: "Jan 01, 2026", regEnd: "Jan 31, 2026", examDate: "Mar 15, 2026", link: "study.iitm.ac.in" },
     { id: 26, name: "IITM BS Qualifier (May Session)", regStart: "Feb 18, 2026", regEnd: "May 30, 2026", examDate: "Jul 19, 2026", link: "study.iitm.ac.in" },
-    { id: 27, name: "IITM BS Qualifier (Sep Session)", regStart: "Aug 24, 2026", regEnd: "Sep 25, 2026", examDate: "Nov 15, 2026", link: "study.iitm.ac.in" }
+    { id: 27, name: "IITM BS Qualifier (Sep Session)", regStart: "Aug 24, 2026", regEnd: "Sep 25, 2026", examDate: "Nov 15, 2026", link: "study.iitm.ac.in" },
+    { id: 28, name: "KIITEE 2026 (Phase 1)", regStart: "Nov 10, 2025", regEnd: "Apr 08, 2026", examDate: "Apr 16–20, 2026", link: "kiitee.kiit.ac.in" },
+    { id: 29, name: "KIITEE 2026 (Phase 2)", regStart: "Apr 09, 2026", regEnd: "May 30, 2026", examDate: "Jun 04–08, 2026", link: "kiitee.kiit.ac.in" },
+    { id: 30, name: "KIITEE 2026 (Phase 3)", regStart: "May 31, 2026", regEnd: "Jul 01, 2026", examDate: "Jul 05–07, 2026", link: "kiitee.kiit.ac.in" }
 ];
