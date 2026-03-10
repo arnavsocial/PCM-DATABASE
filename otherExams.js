@@ -56,5 +56,6 @@ const initialOtherExams = [
     { id: 45, name: "SAAT", regStart: "Dec 07, 2025", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "admission.soa.ac.in" },
     { id: 31, name: "FDDI AIST 2026", regStart: "Jan 01, 2026", regEnd: "Apr 20, 2026", examDate: "-", link: "fddiindia.com" },
     { id: 32, name: "AICEE 2026", regStart: "Oct 20, 2025", regEnd: "Apr 10, 2026", examDate: "-", link: "aicee.net" },
-    { id: 33, name: "PERA CET 2026", regStart: "Jun 03, 2026", regEnd: "Jun 25, 2026", examDate: "-", link: "peracets.com" }
+    { id: 33, name: "PERA CET 2026", regStart: "Jun 03, 2026", regEnd: "Jun 25, 2026", examDate: "-", link: "peracets.com" },
+    { id: 34, name: "AP EAMCET 2026", regStart: "Feb 04, 2026", regEnd: "Mar 17, 2026", examDate: "-", link: "cets.apsche.ap.gov.in" }
 ];
