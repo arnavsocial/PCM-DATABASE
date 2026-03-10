@@ -10,7 +10,7 @@ const initialOtherExams = [
     { id: 7, name: "NEST", regStart: "Jan 05, 2026", regEnd: "Apr 06, 2026", examDate: "Jun 2026", link: "nestexam.in" },
     { id: 8, name: "ISI Admission Test", regStart: "Apr 28, 2026", regEnd: "May 28, 2026", examDate: "May 2026", link: "admission.isical.ac.in" },
     { id: 9, name: "UGEE (IIIT Hyderabad)", regStart: "Feb 11, 2026", regEnd: "Mar 31, 2026", examDate: "May 2026", link: "ugadmissions.iiit.ac.in" },
-    { id: 10, name: "ICAR AIEEA", regStart: "May 01, 2026", regEnd: "Jun 15, 2026", examDate: "Jul 2026", link: "icar.org.in" },
+    { id: 10, name: "ICAR AIEEA", regStart: "march 01, 2026", regEnd: "march 30, 2026", examDate: "Jul 2026", link: "icar.org.in" },
     { id: 11, name: "State Agriculture CET", regStart: "Varies", regEnd: "Varies", examDate: "Apr-May 2026", link: "State Portals" },
 
     // 3. Design, Architecture & Fashion
@@ -53,5 +53,6 @@ const initialOtherExams = [
     { id: 42, name: "Tripura JEE", regStart: "Feb 01, 2026", regEnd: "Feb 28, 2026", examDate: "Apr 2026", link: "tbjee.nic.in" },
     { id: 43, name: "CG PET", regStart: "Mar 02, 2026", regEnd: "Mar 27, 2026", examDate: "May 2026", link: "vyapam.cgstate.gov.in" },
     { id: 44, name: "MP PAT", regStart: "Apr 25, 2026", regEnd: "May 15, 2026", examDate: "Jun 2026", link: "vyapam.mp.gov.in" },
-    { id: 45, name: "SAAT", regStart: "Dec 07, 2025", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "admission.soa.ac.in" }
+    { id: 45, name: "SAAT", regStart: "Dec 07, 2025", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "admission.soa.ac.in" },
+    { id: 31, name: "FDDI AIST 2026", regStart: "Jan 01, 2026", regEnd: "Apr 20, 2026", examDate: "-", link: "fddiindia.com" }
 ];
