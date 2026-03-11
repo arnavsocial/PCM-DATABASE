@@ -9,7 +9,7 @@ const initialOtherExams = [
     // 2. Science Research
     { id: 7, name: "NEST", regStart: "Jan 05, 2026", regEnd: "Apr 06, 2026", examDate: "Jun 2026", link: "nestexam.in" },
     { id: 8, name: "ISI Admission Test", regStart: "Apr 28, 2026", regEnd: "May 28, 2026", examDate: "May 2026", link: "admission.isical.ac.in" },
-    { id: 9, name: "UGEE (IIIT Hyderabad)", regStart: "Feb 11, 2026", regEnd: "Mar 31, 2026", examDate: "May 2026", link: "ugadmissions.iiit.ac.in" },
+    
     { id: 10, name: "ICAR AIEEA", regStart: "march 01, 2026", regEnd: "march 30, 2026", examDate: "Jul 2026", link: "icar.org.in" },
     { id: 11, name: "State Agriculture CET", regStart: "Varies", regEnd: "Varies", examDate: "Apr-May 2026", link: "State Portals" },
 
@@ -23,11 +23,6 @@ const initialOtherExams = [
     { id: 16, name: "AILET", regStart: "Aug 01, 2025", regEnd: "Nov 10, 2025", examDate: "Dec 2025", link: "nludelhi.ac.in" },
     { id: 17, name: "SLAT", regStart: "Nov 01, 2025", regEnd: "Nov 30, 2025", examDate: "Dec 2025 - Jan 2026", link: "set-test.org" },
     { id: 18, name: "LSAT India", regStart: "Dec 01, 2025", regEnd: "Mar 31, 2026", examDate: "Jan-May 2026", link: "lsac.org" },
-
-    // 5. Management & Commerce
-    { id: 20, name: "CA Foundation", regStart: "Open", regEnd: "Jan 31, 2026", examDate: "May-Jun 2026", link: "icai.org" },
-    { id: 21, name: "CS Foundation", regStart: "Open", regEnd: "Feb 28, 2026", examDate: "Jun 2026", link: "icsi.edu" },
-    { id: 22, name: "CMA Foundation", regStart: "Open", regEnd: "Jan 31, 2026", examDate: "Jun 2026", link: "icmai.in" },
 
     // 6. Defence & Specialized
     { id: 23, name: "NDA II 2026", regStart: "Jun 01, 2026", regEnd: "Jul 31, 2026", examDate: "Sep 2026", link: "upsc.gov.in" },
@@ -44,7 +39,6 @@ const initialOtherExams = [
     { id: 33, name: "NCHMCT JEE", regStart: "Feb 01, 2026", regEnd: "Mar 25, 2026", examDate: "Apr 2026", link: "exams.nta.nic.in" },
     { id: 34, name: "IIMC Entrance Exam", regStart: "Feb 01, 2026", regEnd: "Feb 10, 2026", examDate: "Mar-Apr 2026", link: "iimc.gov.in" },
     { id: 35, name: "Jamia/XIC Entrance", regStart: "Feb 20, 2026", regEnd: "Mar 31, 2026", examDate: "May-Jun 2026", link: "jamiahamdard.edu/xic" },
-    { id: 36, name: "Chandigarh Univ CUCET", regStart: "Oct 25, 2025", regEnd: "Mar 15, 2026", examDate: "May 2026", link: "cucet.cuchd.in" },
     { id: 37, name: "Gujarat ACPC Admission", regStart: "Feb 09, 2026", regEnd: "Mar 30, 2026", examDate: "Jun 2026", link: "gujacpc.admissions.nic.in" },
     { id: 38, name: "TNEA", regStart: "May 01, 2026", regEnd: "Jun 06, 2026", examDate: "Jun 2026", link: "tneaonline.org" },
     { id: 39, name: "IMU CET", regStart: "Mar 07, 2026", regEnd: "May 02, 2026", examDate: "May 2026", link: "imu.edu.in" },
@@ -55,7 +49,5 @@ const initialOtherExams = [
     { id: 44, name: "MP PAT", regStart: "Apr 25, 2026", regEnd: "May 15, 2026", examDate: "Jun 2026", link: "vyapam.mp.gov.in" },
     { id: 45, name: "SAAT", regStart: "Dec 07, 2025", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "admission.soa.ac.in" },
     { id: 31, name: "FDDI AIST 2026", regStart: "Jan 01, 2026", regEnd: "Apr 20, 2026", examDate: "-", link: "fddiindia.com" },
-    { id: 32, name: "AICEE 2026", regStart: "Oct 20, 2025", regEnd: "Apr 10, 2026", examDate: "-", link: "aicee.net" },
-    { id: 33, name: "PERA CET 2026", regStart: "Jun 03, 2026", regEnd: "Jun 25, 2026", examDate: "-", link: "peracets.com" },
-    { id: 34, name: "AP EAMCET 2026", regStart: "Feb 04, 2026", regEnd: "Mar 17, 2026", examDate: "-", link: "cets.apsche.ap.gov.in" }
+
 ];
