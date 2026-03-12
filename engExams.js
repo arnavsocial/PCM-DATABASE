@@ -34,4 +34,5 @@ const initialEngExams = [
     { id: 33, name: "PERA CET 2026", regStart: "Jun 03, 2026", regEnd: "Jun 25, 2026", examDate: "-", link: "peracets.com" },
     { id: 34, name: "AP EAMCET 2026", regStart: "Feb 04, 2026", regEnd: "Mar 17, 2026", examDate: "-", link: "cets.apsche.ap.gov.in" },
     { id: 35, name: "UGEE (IIIT Hyderabad)", regStart: "Feb 11, 2026", regEnd: "Mar 31, 2026", examDate: "May 2026", link: "ugadmissions.iiit.ac.in" },
+    { id: 36, name: "BIT Mesra BEEE 2026", regStart: "Feb 01, 2026", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "bitmesra.ac.in" },
 ];
