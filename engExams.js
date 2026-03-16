@@ -26,13 +26,14 @@ const initialEngExams = [
     { id: 25, name: "IITM BS Qualifier (Jan Session)", regStart: "Jan 01, 2026", regEnd: "Jan 31, 2026", examDate: "Mar 15, 2026", link: "study.iitm.ac.in" },
     { id: 26, name: "IITM BS Qualifier (May Session)", regStart: "Feb 18, 2026", regEnd: "May 30, 2026", examDate: "Jul 19, 2026", link: "study.iitm.ac.in" },
     { id: 27, name: "IITM BS Qualifier (Sep Session)", regStart: "Aug 24, 2026", regEnd: "Sep 25, 2026", examDate: "Nov 15, 2026", link: "study.iitm.ac.in" },
-    { id: 28, name: "KIITEE 2026 (Phase 1)", regStart: "Nov 10, 2025", regEnd: "Apr 08, 2026", examDate: "Apr 16–20, 2026", link: "kiitee.kiit.ac.in" },
-    { id: 29, name: "KIITEE 2026 (Phase 2)", regStart: "Apr 09, 2026", regEnd: "May 30, 2026", examDate: "Jun 04–08, 2026", link: "kiitee.kiit.ac.in" },
-    { id: 30, name: "KIITEE 2026 (Phase 3)", regStart: "May 31, 2026", regEnd: "Jul 01, 2026", examDate: "Jul 05–07, 2026", link: "kiitee.kiit.ac.in" },
-    { id: 31, name: "Chandigarh Univ CUCET", regStart: "Oct 25, 2025", regEnd: "Mar 15, 2026", examDate: "May 2026", link: "cucet.cuchd.in" },
-    { id: 32, name: "AICEE 2026", regStart: "Oct 20, 2025", regEnd: "Apr 10, 2026", examDate: "-", link: "aicee.net" },
-    { id: 33, name: "PERA CET 2026", regStart: "Jun 03, 2026", regEnd: "Jun 25, 2026", examDate: "-", link: "peracets.com" },
-    { id: 34, name: "AP EAMCET 2026", regStart: "Feb 04, 2026", regEnd: "Mar 17, 2026", examDate: "-", link: "cets.apsche.ap.gov.in" },
-    { id: 35, name: "UGEE (IIIT Hyderabad)", regStart: "Feb 11, 2026", regEnd: "Mar 31, 2026", examDate: "May 2026", link: "ugadmissions.iiit.ac.in" },
-    { id: 36, name: "BIT Mesra BEEE 2026", regStart: "Feb 01, 2026", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "bitmesra.ac.in" }
+    { id: 28, name: "SRMJEEE 2026 Registration (Phase 3)", regStart: "Nov 3, 2025", regEnd: "Jun 30, 2026", examDate: "July 4–5, 2026", link: "srmist.edu.in" },
+    { id: 29, name: "IIT Guwahati", regStart: "Mar 10, 2026", regEnd: "Apr 30, 2026", examDate: "Sep 7, 2026", link: "iitg.ac.in" },
+    { id: 30, name: "KIITEE 2026 (Phase 2)", regStart: "Apr 09, 2026", regEnd: "May 30, 2026", examDate: "Jun 04–08, 2026", link: "kiitee.kiit.ac.in" },
+    { id: 31, name: "KIITEE 2026 (Phase 3)", regStart: "May 31, 2026", regEnd: "Jul 01, 2026", examDate: "Jul 05–07, 2026", link: "kiitee.kiit.ac.in" },
+    { id: 32, name: "Chandigarh Univ CUCET", regStart: "Oct 25, 2025", regEnd: "Mar 15, 2026", examDate: "May 2026", link: "cucet.cuchd.in" },
+    { id: 33, name: "AICEE 2026", regStart: "Oct 20, 2025", regEnd: "Apr 10, 2026", examDate: "-", link: "aicee.net" },
+    { id: 34, name: "PERA CET 2026", regStart: "Jun 03, 2026", regEnd: "Jun 25, 2026", examDate: "-", link: "peracets.com" },
+    { id: 35, name: "AP EAMCET 2026", regStart: "Feb 04, 2026", regEnd: "Mar 17, 2026", examDate: "-", link: "cets.apsche.ap.gov.in" },
+    { id: 36, name: "UGEE (IIIT Hyderabad)", regStart: "Feb 11, 2026", regEnd: "Mar 31, 2026", examDate: "May 2026", link: "ugadmissions.iiit.ac.in" },
+    { id: 37, name: "BIT Mesra BEEE 2026", regStart: "Feb 01, 2026", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "bitmesra.ac.in" }
 ];
