@@ -35,5 +35,11 @@ const initialEngExams = [
     { id: 37, name: "BIT Mesra BEEE 2026", regStart: "Feb 01, 2026", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "bitmesra.ac.in" },
     { id: 24, name: "SRMJEEE 2026 (Phase 1)", regStart: "Nov 3, 2025", regEnd: "Apr 16, 2026", examDate: "Apr 23–28, 2026", link: "srmist.edu.in" },
     { id: 25, name: "SRMJEEE 2026 (Phase 2)", regStart: "Nov 3, 2025", regEnd: "Jun 4, 2026", examDate: "Jun 10–15, 2026", link: "srmist.edu.in" },
-    { id: 26, name: "SRMJEEE 2026 (Phase 3)", regStart: "Nov 3, 2025", regEnd: "Jun 30, 2026", examDate: "Jul 4–5, 2026", link: "srmist.edu.in" }
+    { id: 26, name: "SRMJEEE 2026 (Phase 3)", regStart: "Nov 3, 2025", regEnd: "Jun 30, 2026", examDate: "Jul 4–5, 2026", link: "srmist.edu.in" },
+    { id: 28, name: "IIT Patna CET (Phase 1)", regStart: "Apr 01, 2026", regEnd: "May 31, 2026", examDate: "Jun 21, 2026", link: "iitp.ac.in" },
+    { id: 29, name: "IIT Patna CET (Phase 2)", regStart: "Jul 01, 2026", regEnd: "Aug 15, 2026", examDate: "Sep 06, 2026", link: "iitp.ac.in" },
+    { id: 30, name: "IIT Patna CET (Phase 3)", regStart: "Oct 01, 2026", regEnd: "Nov 15, 2026", examDate: "Dec 06, 2026", link: "iitp.ac.in" },
+    { id: 31, name: "IIT Jodhpur CET (Phase 1)", regStart: "Apr 10, 2026", regEnd: "Jun 10, 2026", examDate: "Jun 28, 2026", link: "iitj.ac.in" },
+    { id: 32, name: "IIT Jodhpur CET (Phase 2)", regStart: "Jul 15, 2026", regEnd: "Sep 01, 2026", examDate: "Sep 20, 2026", link: "iitj.ac.in" },
+    { id: 33, name: "IIT Jodhpur CET (Phase 3)", regStart: "Oct 10, 2026", regEnd: "Nov 30, 2026", examDate: "Dec 20, 2026", link: "iitj.ac.in" }
 ];
