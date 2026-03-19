@@ -56,35 +56,41 @@ window.useCollegeLogic = () => {
         return [...colleges].sort((a, b) => (b.popScore || 0) - (a.popScore || 0));
     };
 
+    // --- IMPROVED EXAM SORTING LOGIC ---
     const getLiveStatus = (exam) => {
         const today = new Date(currentDate); 
+        today.setHours(0,0,0,0);
+
         const start = new Date(exam.regStart);
         const end = new Date(exam.regEnd);
         
-        today.setHours(0,0,0,0);
-        start.setHours(0,0,0,0);
-        end.setHours(0,0,0,0);
-
-        const msPerDay = 1000 * 60 * 60 * 24;
-        const diffTime = end.getTime() - today.getTime();
-        const diffDays = Math.ceil(diffTime / msPerDay);
-
+        // Failsafe for invalid dates
         if (isNaN(start.getTime()) || isNaN(end.getTime())) {
             return { label: "Date Error", color: "bg-gray-100", priority: 5 };
         }
 
+        start.setHours(0,0,0,0);
+        end.setHours(0,0,0,0);
+
+        const msPerDay = 1000 * 60 * 60 * 24;
+        const diffDays = Math.ceil((end.getTime() - today.getTime()) / msPerDay);
+
+        // 1. Check if completely closed
+        if (today > end) {
+             return { label: `Closed on ${exam.regEnd}`, color: 'bg-gray-200 text-gray-600 border border-gray-300', priority: 4 };
+        }
+        
+        // 2. Check if open and closing soon (<= 10 days)
         if (today >= start && diffDays >= 0 && diffDays <= 10) {
             return { label: `Closing in ${diffDays} Days`, color: 'bg-red-100 text-red-700 border border-red-200', priority: 1 };
         }
 
-        if (today > end) {
-             return { label: `Closed on ${exam.regEnd}`, color: 'bg-gray-200 text-gray-600 border border-gray-300', priority: 4 };
-        }
-
+        // 3. Check if currently open (but not closing soon)
         if (today >= start && today <= end) {
             return { label: `Opened on ${exam.regStart}`, color: 'bg-green-100 text-green-700 border border-green-200', priority: 2 };
         }
 
+        // 4. Check if opening in the future
         if (today < start) {
             return { label: `Opens on ${exam.regStart}`, color: 'bg-blue-100 text-blue-700 border border-blue-200', priority: 3 };
         }
@@ -96,12 +102,28 @@ window.useCollegeLogic = () => {
         return [...exams].sort((a, b) => {
             const statA = getLiveStatus(a);
             const statB = getLiveStatus(b);
+            
+            // Primary Sort: By Priority Tier
             if (statA.priority !== statB.priority) {
                 return statA.priority - statB.priority;
             }
-            const dateA = new Date(a.regEnd);
-            const dateB = new Date(b.regEnd);
-            return dateA - dateB;
+            
+            // Secondary Sort: If they have the same priority, sort dates based on context
+            const startA = new Date(a.regStart).getTime() || 0;
+            const startB = new Date(b.regStart).getTime() || 0;
+            const endA = new Date(a.regEnd).getTime() || Number.MAX_SAFE_INTEGER;
+            const endB = new Date(b.regEnd).getTime() || Number.MAX_SAFE_INTEGER;
+
+            if (statA.priority === 3) {
+                // Both are UPCOMING: Sort by Start Date Ascending (Opening soonest first)
+                return startA - startB;
+            } else if (statA.priority === 4) {
+                // Both are CLOSED: Sort by End Date Descending (Most recently closed first)
+                return endB - endA; 
+            } else {
+                // Both are OPEN or CLOSING SOON: Sort by End Date Ascending (Closing soonest first)
+                return endA - endB;
+            }
         });
     };
 
