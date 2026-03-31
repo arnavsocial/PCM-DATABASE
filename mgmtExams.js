@@ -1,5 +1,5 @@
-const initialmgmtExams = [
-    { id: 1, name: "CUET UG (BBA)", regStart: "Jan 03, 2026", regEnd: "Jan 30, 2026", examDate: "May 11 - May 31, 2026", link: "cuet.nta.nic.in" },
+const initialMgmtExams = [
+    { id: 1, name: "CUET UG (BBA)", regStart: "Feb 09, 2026", regEnd: "Mar 31, 2026", examDate: "May 2026", link: "cuet.samarth.ac.in" },
     { id: 2, name: "IPMAT Indore", regStart: "Feb 02, 2026", regEnd: "Mar 17, 2026", examDate: "May 04, 2026", link: "iimidr.ac.in" },
     { id: 3, name: "SET (Symbiosis)", regStart: "Dec 15, 2025", regEnd: "Apr 15, 2026", examDate: "May 2026", link: "set-test.org" },
     { id: 4, name: "NPAT (NMIMS)", regStart: "Jan 28, 2026", regEnd: "May 26, 2026", examDate: "Feb 10 - Jun 01, 2026", link: "npat.nmims.edu" },
@@ -19,5 +19,5 @@ const initialmgmtExams = [
     { id: 18, name: "VEE (Vels Entrance)", regStart: "Jan 2026", regEnd: "Apr 2026", examDate: "May 2026", link: "velsuniv.ac.in" },
     { id: 19, name: "AUMAT (Alliance)", regStart: "Jan 2026", regEnd: "May 2026", examDate: "Jun 2026", link: "alliance.edu.in" },
     { id: 20, name: "SUAT (Sharda Univ BBA)", regStart: "Jan 2026", regEnd: "May 2026", examDate: "Jun 2026", link: "suat.sharda.ac.in" },
-    { id: 21, name: "FEAT (FLAME University)", regStart: "Dec 2025", regEnd: "Apr 01, 2026", examDate: "Apr 2026", link: "flame.edu.in" }
+    { id: 21, name: "FEAT (FLAME University)", regStart: "Dec 2025", regEnd: "Apr 01, 2026", examDate: "Apr 2026", link: "flame.edu.in" },
 ];
