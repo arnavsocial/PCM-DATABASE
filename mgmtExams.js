@@ -1,23 +1,11 @@
-const initialmgmtExam = [
+const initialMgmtExams = [
     { id: 1, name: "CUET UG (BBA)", regStart: "Feb 09, 2026", regEnd: "Mar 31, 2026", examDate: "May 2026", link: "cuet.samarth.ac.in" },
-    { id: 2, name: "IPMAT Indore", regStart: "Feb 02, 2026", regEnd: "Mar 17, 2026", examDate: "May 04, 2026", link: "iimidr.ac.in" },
-    { id: 3, name: "SET (Symbiosis)", regStart: "Dec 15, 2025", regEnd: "Apr 15, 2026", examDate: "May 2026", link: "set-test.org" },
-    { id: 4, name: "NPAT (NMIMS)", regStart: "Jan 28, 2026", regEnd: "May 26, 2026", examDate: "Feb 10 - Jun 01, 2026", link: "npat.nmims.edu" },
-    { id: 5, name: "Christ ET", regStart: "Dec 08, 2025", regEnd: "Apr 20, 2026", examDate: "May 2026", link: "christuniversity.in" },
-    { id: 6, name: "IPU CET (Mgmt)", regStart: "Feb 01, 2026", regEnd: "Apr 15, 2026", examDate: "May 2026", link: "ipu.ac.in" },
-    { id: 7, name: "JIPMAT 2026", regStart: "Mar 2026", regEnd: "Apr 2026", examDate: "Jun 2026", link: "jipmat.nta.ac.in" },
-    { id: 8, name: "IPMAT Rohtak 2026", regStart: "Feb 06, 2026", regEnd: "Apr 06, 2026", examDate: "May 10, 2026", link: "iimrohtak.ac.in" },
-    { id: 9, name: "UGAT (AIMA)", regStart: "Jan 2026", regEnd: "Jun 2026", examDate: "Jun 2026", link: "aima.in" },
-    { id: 10, name: "St. Xavier's BMS Entrance", regStart: "May 2026", regEnd: "Jun 2026", examDate: "Jun 2026", link: "xaviers.edu" },
-    { id: 11, name: "UPESMET UG", regStart: "Jan 2026", regEnd: "May 2026", examDate: "Jun 2026", link: "upes.ac.in" },
-    { id: 12, name: "BUMAT (Bharati Vidyapeeth)", regStart: "Nov 19, 2025", regEnd: "Jun 05, 2026", examDate: "Jun 2026", link: "bvuniversity.edu.in" },
-    { id: 13, name: "MAH BBA CET", regStart: "Mar 2026", regEnd: "Apr 2026", examDate: "May 2026", link: "cetcell.mahacet.org" },
-    { id: 14, name: "PESSAT BBA", regStart: "Nov 2025", regEnd: "Apr 2026", examDate: "May 2026", link: "pessat.com" },
-    { id: 15, name: "LUCSAT / UGPET (Lucknow Univ)", regStart: "Apr 2026", regEnd: "Jun 2026", examDate: "Jul 2026", link: "lkouniv.ac.in" },
-    { id: 16, name: "CUCET (Chandigarh Univ)", regStart: "Dec 2025", regEnd: "May 2026", examDate: "Multiple Phases", link: "cucet.cuchd.in" },
-    { id: 17, name: "SRMJEEM UG", regStart: "Feb 2026", regEnd: "Apr 2026", examDate: "Multiple Phases", link: "srmist.edu.in" },
-    { id: 18, name: "VEE (Vels Entrance)", regStart: "Jan 2026", regEnd: "Apr 2026", examDate: "May 2026", link: "velsuniv.ac.in" },
-    { id: 19, name: "AUMAT (Alliance)", regStart: "Jan 2026", regEnd: "May 2026", examDate: "Jun 2026", link: "alliance.edu.in" },
-    { id: 20, name: "SUAT (Sharda Univ BBA)", regStart: "Jan 2026", regEnd: "May 2026", examDate: "Jun 2026", link: "suat.sharda.ac.in" },
-    { id: 21, name: "FEAT (FLAME University)", regStart: "Dec 2025", regEnd: "Apr 01, 2026", examDate: "Apr 2026", link: "flame.edu.in" }
+    { id: 2, name: "IPMAT Indore", regStart: "Feb 14, 2026", regEnd: "Mar 26, 2026", examDate: "May 2026", link: "iimidr.ac.in" },
+    { id: 3, name: "SET (Symbiosis)", regStart: "Dec 15, 2025", regEnd: "Apr 12, 2026", examDate: "May 2026", link: "set-test.org" },
+    { id: 4, name: "NPAT (NMIMS)", regStart: "Dec 01, 2025", regEnd: "May 20, 2026", examDate: "Jan-May 26", link: "npat.in" },
+    { id: 5, name: "Christ ET", regStart: "Jan 05, 2026", regEnd: "Apr 20, 2026", examDate: "May 2026", link: "christuniversity.in" },
+    { id: 6, name: "IPU CET (Mgmt)", regStart: "Feb 02, 2026", regEnd: "Mar 31, 2026", examDate: "May 2026", link: "ipu.ac.in" },
+    { id: 7, name: "JIPMAT 2026", regStart: "February 2026", regEnd: "March 2026", examDate: "April 2026", link: "jipmat.nta.ac.in" },
+    { id: 8, name: "IPMAT Rohtak 2026", regStart: "06 Feb ' 26", regEnd: "06 Apr ' 26", examDate: "10 May ' 26", link: "iimrohtak.ac.in" },
+    { id: 9, name: "IPMAT Rohtak (Result)", regStart: "N/A", regEnd: "N/A", examDate: "May ' 26 (Tentative)", link: "iimrohtak.ac.in" }
 ];
