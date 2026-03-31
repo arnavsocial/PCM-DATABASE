@@ -80,7 +80,7 @@ const initialOtherExams = [
   { id: 68, name: "SRMJEEE 2026 (₹1400)", regStart: "Nov 10, 2025", regEnd: "Apr 15, 2026", examDate: "Apr 2026", link: "srmist.edu.in" },
   { id: 69, name: "BITSAT 2026 (₹3400)", regStart: "Jan 15, 2026", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "bitsadmission.com" },
   { id: 70, name: "KIITEE 2026 (Free)", regStart: "Nov 10, 2025", regEnd: "Apr 10, 2026", examDate: "Apr 2026", link: "kiitee.kiit.ac.in" },
-  { id: 71, name: "SAAT 2026 (Phase 2) (Free)", regStart: "Apr 01, 2026", regEnd: "May 31, 2026", examDate: "Jun 2026", link: "admission.soa.ac.in" }, // Corrected duplicate SAAT 
+  { id: 71, name: "SAAT 2026 (Phase 2) (Free)", regStart: "Apr 01, 2026", regEnd: "May 31, 2026", examDate: "Jun 2026", link: "admission.soa.ac.in" },
   { id: 72, name: "LPUNEST 2026 (₹1000)", regStart: "Oct 15, 2025", regEnd: "Mar 31, 2026", examDate: "Apr 2026", link: "nest.lpu.in" },
   { id: 73, name: "NMIMS NPAT 2026 (₹2000)", regStart: "Dec 06, 2025", regEnd: "May 20, 2026", examDate: "May 2026", link: "nmimsnpat.in" },
   { id: 74, name: "Amity Entrance Test 2026 (₹1500)", regStart: "Jan 01, 2026", regEnd: "May 30, 2026", examDate: "Jun 2026", link: "amity.edu" },
