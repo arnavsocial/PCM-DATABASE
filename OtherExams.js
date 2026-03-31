@@ -1,4 +1,4 @@
-const initialotherExams = [
+const initialOtherExams = [
   // 1. Medical, Pharmacy & Paramedical
   { id: 1, name: "NEET UG (₹1700)", regStart: "Feb 08, 2026", regEnd: "Mar 11, 2026", examDate: "May 2026", link: "exams.nta.ac.in/NEET" },
   { id: 2, name: "B.Pharm (NEET/State) (Varies)", regStart: "Varies", regEnd: "Varies", examDate: "May-Jun 2026", link: "State Portals" },
