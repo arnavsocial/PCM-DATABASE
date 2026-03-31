@@ -1,4 +1,4 @@
-const mgmtExams = [
+const initialMgmtExams = [
     { id: 1, name: "CUET UG (BBA)", regStart: "Jan 03, 2026", regEnd: "Jan 30, 2026", examDate: "May 11 - May 31, 2026", link: "cuet.nta.nic.in" },
     { id: 2, name: "IPMAT Indore", regStart: "Feb 02, 2026", regEnd: "Mar 17, 2026", examDate: "May 04, 2026", link: "iimidr.ac.in" },
     { id: 3, name: "SET (Symbiosis)", regStart: "Dec 15, 2025", regEnd: "Apr 15, 2026", examDate: "May 2026", link: "set-test.org" },
