@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Database 2026 - Final</title>
+    <title>College Database 2026 - Responsive Final</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -27,15 +27,24 @@
         /* Dark Mode Toggle Switch */
         .checkbox { opacity: 0; position: absolute; }
         .checkbox-label {
-            background-color: #111; width: 50px; height: 26px; border-radius: 50px;
-            position: relative; padding: 5px; cursor: pointer; display: flex;
+            background-color: #111; width: 44px; height: 24px; border-radius: 50px;
+            position: relative; padding: 4px; cursor: pointer; display: flex;
             justify-content: space-between; align-items: center; margin-bottom: 0;
         }
-        .checkbox-label .ball {
-            background-color: #fff; width: 22px; height: 22px; position: absolute;
-            left: 2px; top: 2px; border-radius: 50%; transition: transform 0.2s linear;
+        @media (min-width: 768px) {
+            .checkbox-label { width: 50px; height: 26px; padding: 5px; }
         }
-        .checkbox:checked + .checkbox-label .ball { transform: translateX(24px); }
+        .checkbox-label .ball {
+            background-color: #fff; width: 18px; height: 18px; position: absolute;
+            left: 2px; top: 3px; border-radius: 50%; transition: transform 0.2s linear;
+        }
+        @media (min-width: 768px) {
+            .checkbox-label .ball { width: 22px; height: 22px; left: 2px; top: 2px; }
+        }
+        .checkbox:checked + .checkbox-label .ball { transform: translateX(22px); }
+        @media (min-width: 768px) {
+            .checkbox:checked + .checkbox-label .ball { transform: translateX(24px); }
+        }
 
         /* Dark Mode Styling Logic */
         .dark { background-color: #292c35; color: #fff; }
@@ -52,9 +61,12 @@
 
         /* Neumorphic Card Base */
         .neu-card {
-            border-radius: 30px;
+            border-radius: 16px;
             background: #e0e0e0;
-            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+            box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
+        }
+        @media (min-width: 768px) {
+            .neu-card { border-radius: 30px; box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff; }
         }
         .dark .neu-card {
             background: #292c35;
@@ -77,11 +89,14 @@
         /* Segmented Options Buttons (Neumorphic Tabs) */
         .tab-btn {
             font: inherit; background-color: #f0f0f0; border: 0; color: #242424;
-            font-size: 0.95rem; padding: 0.5em 1.5em; text-shadow: 0 0.0625em 0 #fff;
+            font-size: 0.8rem; padding: 0.4em 0.8em; text-shadow: 0 0.0625em 0 #fff;
             box-shadow: inset 0 0.0625em 0 0 #f4f4f4, 0 0.0625em 0 0 #efefef,
                 0 0.125em 0 0 #ececec, 0 0.25em 0 0 #e0e0e0, 0 0.3125em 0 0 #dedede,
                 0 0.375em 0 0 #dcdcdc, 0 0.425em 0 0 #cacaca, 0 0.425em 0.5em 0 #cecece;
             transition: 0.23s ease; cursor: pointer; font-weight: bold; margin: -1px; white-space: nowrap;
+        }
+        @media (min-width: 768px) {
+            .tab-btn { font-size: 0.95rem; padding: 0.5em 1.5em; }
         }
         .tab-btn.left { border-top-left-radius: 0.5em; border-bottom-left-radius: 0.5em; }
         .tab-btn.middle { border-radius: 0px; }
@@ -108,19 +123,24 @@
         }
 
         /* Animated Social Icons */
-        .social-wrapper { display: inline-flex; list-style: none; gap: 12px; padding: 0; margin: 0; }
+        .social-wrapper { display: inline-flex; list-style: none; gap: 8px; padding: 0; margin: 0; }
+        @media (min-width: 768px) { .social-wrapper { gap: 12px; } }
         .social-wrapper .icon {
-            position: relative; background: #fff; border-radius: 50%; padding: 8px;
-            width: 35px; height: 35px; display: flex; justify-content: center; align-items: center;
+            position: relative; background: #fff; border-radius: 50%; padding: 6px;
+            width: 28px; height: 28px; display: flex; justify-content: center; align-items: center;
             box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); cursor: pointer; text-decoration: none;
             transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55); color: #333;
         }
+        @media (min-width: 768px) {
+            .social-wrapper .icon { width: 35px; height: 35px; padding: 8px; }
+        }
         .social-wrapper .tooltip {
-            position: absolute; top: 0; font-size: 12px; background: #fff; color: #fff;
-            padding: 5px 8px; border-radius: 5px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            position: absolute; top: 0; font-size: 10px; background: #fff; color: #fff;
+            padding: 4px 6px; border-radius: 5px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
             opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             white-space: nowrap; z-index: 20;
         }
+        @media (min-width: 768px) { .social-wrapper .tooltip { font-size: 12px; padding: 5px 8px; } }
         .social-wrapper .icon:hover .tooltip { top: -40px; opacity: 1; visibility: visible; pointer-events: auto; }
         .social-wrapper .facebook:hover, .social-wrapper .facebook:hover .tooltip { background: #1877F2; color: #fff; }
         .social-wrapper .twitter:hover, .social-wrapper .twitter:hover .tooltip { background: #1DA1F2; color: #fff; }
@@ -129,27 +149,33 @@
 
         /* Top Action Buttons (Edit/CSV) */
         .action-btn {
-            display: flex; align-items: center; gap: 6px; padding: 8px 16px;
-            border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;
+            display: flex; align-items: center; gap: 4px; padding: 6px 12px;
+            border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 0.85rem;
             transition: transform 0.2s, background 0.2s; background-color: #3b82f6; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
+        @media (min-width: 768px) {
+            .action-btn { padding: 8px 16px; font-size: 1rem; gap: 6px; }
+        }
         .action-btn:hover { transform: scale(1.05); }
-        .action-btn svg { width: 18px; height: 18px; fill: currentColor; }
+        .action-btn svg { width: 16px; height: 16px; fill: currentColor; }
+        @media (min-width: 768px) { .action-btn svg { width: 18px; height: 18px; } }
         .action-btn.edit { background-color: #f59e0b; color: #fff; }
         .action-btn.download { background-color: #10b981; }
 
-        /* Uiverse Apply Now Button (For Table Links) */
+        /* Uiverse Apply Now Button */
         .apply-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 4px;
-            padding: 6px 12px; border-radius: 8px; background-color: #2563eb; 
-            color: white; font-weight: 600; font-size: 0.75rem; border: none; text-decoration: none;
+            padding: 6px 10px; border-radius: 8px; background-color: #2563eb; 
+            color: white; font-weight: 600; font-size: 0.7rem; border: none; text-decoration: none;
             cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
         }
+        @media (min-width: 768px) { .apply-btn { padding: 6px 12px; font-size: 0.75rem; } }
         .apply-btn:hover { background-color: #1d4ed8; transform: scale(1.05); color: white;}
-        .apply-btn .icon { width: 14px; height: 14px; fill: currentColor; }
+        .apply-btn .icon { width: 12px; height: 12px; fill: currentColor; }
+        @media (min-width: 768px) { .apply-btn .icon { width: 14px; height: 14px; } }
 
         /* Utils */
-        .edit-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 4px; padding: 2px 4px; color: black; }
+        .edit-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 4px; padding: 2px 4px; color: black; font-size: inherit;}
         .sticky-col-shadow { box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1); }
         .dark .sticky-col-shadow { box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.5); }
     </style>
@@ -171,18 +197,92 @@
         const IconEdit = () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>;
         const IconCheck = () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>;
         const IconDownload = () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>;
-        const IconBuilding = () => <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>;
+        const IconBuilding = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>;
+
+        // --- THE HOOK LOGIC (Inlined for standalone ease, extracts exactly as logic.js does) ---
+        const useCollegeLogic = () => {
+            const [activeTab, setActiveTab] = useState('eng'); 
+            const [search, setSearch] = useState('');
+            const [isEditMode, setIsEditMode] = useState(false);
+            const [currentDate, setCurrentDate] = useState(new Date());
+
+            const [engData, setEngData] = useState(typeof window.initialEngData !== 'undefined' ? window.initialEngData : []);
+            const [mgmtData, setMgmtData] = useState(typeof window.initialMgmtData !== 'undefined' ? window.initialMgmtData : []);
+            const [engExamData, setEngExamData] = useState(typeof window.initialEngExams !== 'undefined' ? window.initialEngExams : []);
+            const [mgmtExamData, setMgmtExamData] = useState(typeof window.initialMgmtExams !== 'undefined' ? window.initialMgmtExams : []);
+            const [otherExamData, setOtherExamData] = useState(typeof window.initialOtherExams !== 'undefined' ? window.initialOtherExams : []);
+
+            useEffect(() => {
+                const timer = setInterval(() => setCurrentDate(new Date()), 60000);
+                return () => clearInterval(timer);
+            }, []);
+
+            const updateEng = (id, field, val) => setEngData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+            const updateMgmt = (id, field, val) => setMgmtData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+            const updateExam = (id, type, field, val) => {
+                if (type === 'eng') setEngExamData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+                else if (type === 'mgmt') setMgmtExamData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+                else setOtherExamData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+            };
+
+            const filterList = (list) => {
+                if (!list) return [];
+                const s = search.toLowerCase();
+                return list.filter(item => {
+                    return (item.name && item.name.toLowerCase().includes(s)) || 
+                           (item.location && item.location.toLowerCase().includes(s)) || 
+                           (item.entrance && item.entrance.toLowerCase().includes(s));
+                });
+            };
+
+            const formatCurrency = (val) => val ? `₹${val} L` : 'N/A';
+            const formatPkg = (val) => val ? `₹${val} LPA` : 'N/A';
+            const sortColleges = (colleges) => [...colleges].sort((a, b) => (b.popScore || 0) - (a.popScore || 0));
+
+            const getLiveStatus = (exam) => {
+                const today = new Date(currentDate); today.setHours(0,0,0,0);
+                const start = new Date(exam.regStart); const end = new Date(exam.regEnd);
+                if (isNaN(start.getTime()) || isNaN(end.getTime())) return { label: "Date Error", color: "bg-gray-100", priority: 5 };
+                start.setHours(0,0,0,0); end.setHours(0,0,0,0);
+                const diffDays = Math.ceil((end.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+                if (today > end) return { label: `Closed`, color: 'bg-gray-200 text-gray-600 border border-gray-300', priority: 4 };
+                if (today >= start && diffDays >= 0 && diffDays <= 10) return { label: `Closes in ${diffDays}d`, color: 'bg-red-100 text-red-700 border border-red-200', priority: 1 };
+                if (today >= start && today <= end) return { label: `Opened`, color: 'bg-green-100 text-green-700 border border-green-200', priority: 2 };
+                if (today < start) return { label: `Upcoming`, color: 'bg-blue-100 text-blue-700 border border-blue-200', priority: 3 };
+                return { label: "Unknown", color: "bg-gray-100", priority: 5 };
+            };
+
+            const sortExams = (exams) => {
+                return [...exams].sort((a, b) => {
+                    const statA = getLiveStatus(a); const statB = getLiveStatus(b);
+                    if (statA.priority !== statB.priority) return statA.priority - statB.priority;
+                    const startA = new Date(a.regStart).getTime() || 0; const startB = new Date(b.regStart).getTime() || 0;
+                    const endA = new Date(a.regEnd).getTime() || Number.MAX_SAFE_INTEGER; const endB = new Date(b.regEnd).getTime() || Number.MAX_SAFE_INTEGER;
+                    if (statA.priority === 3) return startA - startB;
+                    if (statA.priority === 4) return endB - endA; 
+                    return endA - endB;
+                });
+            };
+
+            const downloadCSV = () => alert("CSV Download Triggered");
+
+            return {
+                activeTab, setActiveTab, search, setSearch, isEditMode, setIsEditMode, currentDate,
+                engData, mgmtData, engExamData, mgmtExamData, otherExamData,
+                updateEng, updateMgmt, updateExam, filterList, formatCurrency, formatPkg, 
+                sortColleges, sortExams, getLiveStatus, downloadCSV
+            };
+        };
 
         // --- MAIN COMPONENT ---
         const CollegeApp = () => {
-            // Hook pulled from logic.js
             const {
                 activeTab, setActiveTab, search, setSearch,
                 isEditMode, setIsEditMode, currentDate,
                 engData, mgmtData, engExamData, mgmtExamData, otherExamData,
                 updateEng, updateMgmt, updateExam, filterList, formatCurrency, formatPkg, 
                 sortColleges, sortExams, getLiveStatus, downloadCSV
-            } = window.useCollegeLogic();
+            } = (window.useCollegeLogic && typeof window.useCollegeLogic === 'function') ? window.useCollegeLogic() : useCollegeLogic();
 
             const [isDark, setIsDark] = useState(false);
 
@@ -192,36 +292,48 @@
                 else body.classList.remove('dark');
             }, [isDark]);
 
-            // TABLE: COLLEGES
+            // TABLE: COLLEGES (Responsive Abbreviations added)
             const renderCollegeTable = (data, updateFunc) => (
                 <div className="overflow-x-auto min-h-[500px] hide-scroll">
-                    <table className="w-full text-left border-collapse min-w-[800px] md:min-w-full">
+                    <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="bg-gray-50 text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
-                                <th className="p-2 md:p-4 font-bold sticky left-0 z-10 w-10 md:w-12 sticky-col-shadow md:shadow-none bg-gray-50">#</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[160px] md:min-w-[200px]">College Name</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[140px]">Entrance / Reg</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Fees</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Avg Pkg</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center">Val</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center">Pop</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[150px]">Location & Tier</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[200px] md:min-w-[250px]">Notes</th>
+                            <tr className="bg-gray-50 text-[10px] md:text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
+                                <th className="p-2 md:p-4 font-bold sticky left-0 z-10 w-8 md:w-12 sticky-col-shadow md:shadow-none bg-gray-50">#</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[200px]">
+                                    <span className="md:hidden">College</span>
+                                    <span className="hidden md:inline">College Name</span>
+                                </th>
+                                <th className="p-2 md:p-4 font-bold min-w-[80px] md:min-w-[140px]">
+                                    <span className="md:hidden">Ent/Reg</span>
+                                    <span className="hidden md:inline">Entrance / Reg</span>
+                                </th>
+                                <th className="p-2 md:p-4 font-bold min-w-[70px] md:min-w-[120px] text-right">Fees</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[70px] md:min-w-[120px] text-right">
+                                    <span className="md:hidden">Pkg</span>
+                                    <span className="hidden md:inline">Avg Pkg</span>
+                                </th>
+                                <th className="p-2 md:p-4 font-bold w-12 md:min-w-[80px] text-center">Val</th>
+                                <th className="p-2 md:p-4 font-bold w-12 md:min-w-[80px] text-center">Pop</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[90px] md:min-w-[150px]">
+                                    <span className="md:hidden">Loc/Tier</span>
+                                    <span className="hidden md:inline">Location & Tier</span>
+                                </th>
+                                <th className="p-2 md:p-4 font-bold min-w-[150px] md:min-w-[250px]">Notes</th>
                             </tr>
                         </thead>
-                        <tbody className="text-sm divide-y divide-gray-100">
+                        <tbody className="text-xs md:text-sm divide-y divide-gray-100">
                             {data.length === 0 ? (
                                 <tr><td colSpan="9" className="text-center p-8 text-gray-500">No data loaded or empty. Check data files.</td></tr>
                             ) : sortColleges(filterList(data)).map((col, index) => (
                                 <tr key={col.id} className="hover:bg-blue-50 transition-colors duration-150 bg-white">
                                     <td className="p-2 md:p-4 font-medium text-gray-500 sticky left-0 z-10 sticky-col-shadow md:shadow-none bg-white">{index + 1}</td>
                                     <td className="p-2 md:p-4">
-                                        <div className="font-bold text-gray-900 text-sm md:text-base">
+                                        <div className="font-bold text-gray-900">
                                             {isEditMode ? <input className="edit-input" value={col.name || ''} onChange={e => updateFunc(col.id, 'name', e.target.value)} /> : col.name}
                                         </div>
                                     </td>
                                     <td className="p-2 md:p-4">
-                                        <div className="font-semibold text-blue-600 text-xs md:text-sm">
+                                        <div className="font-semibold text-blue-600">
                                             {isEditMode ? <input className="edit-input" value={col.entrance || ''} onChange={e => updateFunc(col.id, 'entrance', e.target.value)} /> : col.entrance}
                                         </div>
                                     </td>
@@ -232,10 +344,10 @@
                                         {isEditMode ? <input className="edit-input text-right" value={col.package || ''} onChange={e => updateFunc(col.id, 'package', e.target.value)} /> : formatPkg(col.package)}
                                     </td>
                                     <td className="p-2 md:p-4 text-center">
-                                        <span className="px-1.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">{col.valScore || '-'}</span>
+                                        <span className="px-1.5 py-0.5 rounded-full text-[10px] md:text-xs font-bold bg-blue-100 text-blue-800">{col.valScore || '-'}</span>
                                     </td>
                                     <td className="p-2 md:p-4 text-center">
-                                        <span className="px-1.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800">{col.popScore || '-'}</span>
+                                        <span className="px-1.5 py-0.5 rounded-full text-[10px] md:text-xs font-bold bg-green-100 text-green-800">{col.popScore || '-'}</span>
                                     </td>
                                     <td className="p-2 md:p-4 text-gray-800">{col.location}</td>
                                     <td className="p-2 md:p-4 text-gray-500 italic">"{col.notes}"</td>
@@ -246,25 +358,37 @@
                 </div>
             );
 
-            // TABLE: EXAMS
+            // TABLE: EXAMS (Responsive Abbreviations added)
             const renderExamTable = (data, type) => {
                 const filtered = filterList(data);
                 const sorted = sortExams(filtered);
                 
                 return (
                     <div className="overflow-x-auto min-h-[500px] hide-scroll">
-                        <table className="w-full text-left border-collapse min-w-[700px] md:min-w-full">
+                        <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="bg-gray-50 text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
-                                    <th className="p-3 md:p-4 font-bold w-32">Status</th>
-                                    <th className="p-3 md:p-4 font-bold min-w-[200px]">Exam Name</th>
-                                    <th className="p-3 md:p-4 font-bold w-32">Reg Start</th>
-                                    <th className="p-3 md:p-4 font-bold w-32">Reg End</th>
-                                    <th className="p-3 md:p-4 font-bold w-32">Exam Date</th>
-                                    <th className="p-3 md:p-4 font-bold text-center w-32">Action</th>
+                                <tr className="bg-gray-50 text-[10px] md:text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
+                                    <th className="p-3 md:p-4 font-bold w-20 md:w-32">Status</th>
+                                    <th className="p-3 md:p-4 font-bold min-w-[100px] md:min-w-[200px]">
+                                        <span className="md:hidden">Exam</span>
+                                        <span className="hidden md:inline">Exam Name</span>
+                                    </th>
+                                    <th className="p-3 md:p-4 font-bold w-20 md:w-32">
+                                        <span className="md:hidden">Start</span>
+                                        <span className="hidden md:inline">Reg Start</span>
+                                    </th>
+                                    <th className="p-3 md:p-4 font-bold w-20 md:w-32">
+                                        <span className="md:hidden">End</span>
+                                        <span className="hidden md:inline">Reg End</span>
+                                    </th>
+                                    <th className="p-3 md:p-4 font-bold w-20 md:w-32">
+                                        <span className="md:hidden">Date</span>
+                                        <span className="hidden md:inline">Exam Date</span>
+                                    </th>
+                                    <th className="p-3 md:p-4 font-bold text-center w-24 md:w-32">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-sm divide-y divide-gray-100">
+                            <tbody className="text-xs md:text-sm divide-y divide-gray-100">
                                 {data.length === 0 ? (
                                     <tr><td colSpan="6" className="text-center p-8 text-gray-500">No data loaded or empty.</td></tr>
                                 ) : sorted.map((ex) => {
@@ -272,11 +396,11 @@
                                     return (
                                         <tr key={ex.id} className="hover:bg-blue-50 transition-colors duration-150 bg-white">
                                             <td className="p-3 md:p-4">
-                                                <span className={`px-2 py-1 rounded-md text-[10px] md:text-xs font-bold border-0 whitespace-nowrap ${statusDetails.color}`}>
+                                                <span className={`px-2 py-1 rounded-md text-[9px] md:text-xs font-bold border-0 whitespace-nowrap ${statusDetails.color}`}>
                                                     {statusDetails.label}
                                                 </span>
                                             </td>
-                                            <td className="p-3 md:p-4 font-bold text-gray-900 text-sm md:text-base">
+                                            <td className="p-3 md:p-4 font-bold text-gray-900">
                                                 {isEditMode ? <input className="edit-input" value={ex.name || ''} onChange={e => updateExam(ex.id, type, 'name', e.target.value)} /> : ex.name}
                                             </td>
                                             <td className="p-3 md:p-4 text-gray-500 font-medium whitespace-nowrap">
@@ -290,10 +414,11 @@
                                             </td>
                                             <td className="p-3 md:p-4 text-center">
                                                 {isEditMode ? (
-                                                    <input className="edit-input" value={ex.link || ''} onChange={e => updateExam(ex.id, type, 'link', e.target.value)} placeholder="Website Link" />
+                                                    <input className="edit-input" value={ex.link || ''} onChange={e => updateExam(ex.id, type, 'link', e.target.value)} placeholder="Link" />
                                                 ) : (
                                                     <a href={`https://${ex.link}`} target="_blank" rel="noreferrer" className="apply-btn">
-                                                        Apply Now
+                                                        <span className="md:hidden">Apply</span>
+                                                        <span className="hidden md:inline">Apply Now</span>
                                                         <svg fill="currentColor" viewBox="0 0 24 24" className="icon"><path clipRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fillRule="evenodd"></path></svg>
                                                     </a>
                                                 )}
@@ -308,31 +433,34 @@
             };
 
             return (
-                <div className="min-h-screen p-4 md:p-8 flex justify-center items-start">
+                <div className="min-h-screen p-2 md:p-8 flex justify-center items-start">
                     <div className="w-full max-w-7xl neu-card overflow-hidden !p-0 flex flex-col">
                         
                         {/* Header Area */}
-                        <div className="p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-6">
-                            <div className="flex items-center gap-4">
-                                <IconBuilding className="text-blue-500" />
-                                <div>
-                                    <h1 className="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide">College Database 2026</h1>
-                                    <p className="text-gray-500 text-sm mt-1">Top Private Colleges & Exams in ONE Place.</p>
+                        <div className="p-4 md:p-8 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+                            
+                            {/* Title block */}
+                            <div className="flex items-center gap-3 w-full justify-center md:w-auto md:justify-start">
+                                <IconBuilding className="text-blue-500 w-6 h-6 md:w-8 md:h-8" />
+                                <div className="text-center md:text-left">
+                                    <h1 className="text-xl md:text-3xl font-bold text-gray-800 tracking-wide">College Database</h1>
+                                    <p className="text-gray-500 text-xs md:text-sm mt-0.5 md:mt-1">Top Private Colleges & Exams</p>
                                 </div>
                             </div>
 
-                            <div className="flex flex-wrap items-center gap-6 justify-center">
+                            {/* Controls block */}
+                            <div className="flex flex-wrap items-center gap-4 md:gap-6 justify-center w-full md:w-auto">
                                 {/* Dark Mode Switch */}
                                 <div className="flex items-center gap-2">
                                     <input type="checkbox" id="dark-toggle" className="checkbox" checked={isDark} onChange={() => setIsDark(!isDark)} />
                                     <label htmlFor="dark-toggle" className="checkbox-label shadow-sm">
-                                        <span className="text-[10px] ml-1">🌙</span>
-                                        <span className="text-[10px] mr-1">☀️</span>
+                                        <span className="text-[8px] md:text-[10px] ml-1">🌙</span>
+                                        <span className="text-[8px] md:text-[10px] mr-1">☀️</span>
                                         <span className="ball shadow-md"></span>
                                     </label>
                                 </div>
 
-                                {/* Social Icons - Updated to link elements */}
+                                {/* Social Icons */}
                                 <ul className="social-wrapper">
                                     <a href="https://www.potato.com" target="_blank" rel="noreferrer" className="icon github">
                                         <span className="tooltip">GitHub</span>
@@ -355,34 +483,44 @@
                                 {/* Action Buttons */}
                                 <div className="flex gap-2">
                                     <button onClick={() => setIsEditMode(!isEditMode)} className={`action-btn ${isEditMode ? 'edit' : ''}`}>
-                                        {isEditMode ? <><IconCheck /> Done</> : <><IconEdit /> Edit</>}
+                                        {isEditMode ? <><IconCheck /> <span className="hidden md:inline">Done</span></> : <><IconEdit /> <span className="hidden md:inline">Edit</span></>}
                                     </button>
                                     <button onClick={downloadCSV} className="action-btn download">
-                                        <IconDownload /> CSV
+                                        <IconDownload /> <span className="hidden md:inline">CSV</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Middle Control Bar */}
-                        <div className="px-6 md:px-8 pb-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                        {/* Middle Control Bar (Tabs & Search) */}
+                        <div className="px-4 md:px-8 pb-4 md:pb-6 flex flex-col-reverse md:flex-row justify-between items-center gap-4">
                             
-                            {/* Segemented Options wrapper -> Scrollbars hidden here! */}
-                            <div className="flex w-full md:w-auto overflow-x-auto overflow-y-hidden hide-scroll py-2 pl-1">
-                                <button onClick={() => setActiveTab('eng')} className={`tab-btn left ${activeTab==='eng' ? 'active' : ''}`}>Engineering</button>
-                                <button onClick={() => setActiveTab('mgmt')} className={`tab-btn middle ${activeTab==='mgmt' ? 'active' : ''}`}>Management</button>
-                                <button onClick={() => setActiveTab('examEng')} className={`tab-btn middle ${activeTab==='examEng' ? 'active' : ''}`}>Eng Exams</button>
-                                <button onClick={() => setActiveTab('examMgmt')} className={`tab-btn middle ${activeTab==='examMgmt' ? 'active' : ''}`}>Mgmt Exams</button>
-                                <button onClick={() => setActiveTab('examOther')} className={`tab-btn right ${activeTab==='examOther' ? 'active' : ''}`}>Other Exams</button>
+                            {/* Segmented Tabs (Abbreviations enabled for mobile) */}
+                            <div className="flex w-full md:w-auto overflow-x-auto overflow-y-hidden hide-scroll py-2 pl-1 snap-x">
+                                <button onClick={() => setActiveTab('eng')} className={`tab-btn left snap-start ${activeTab==='eng' ? 'active' : ''}`}>
+                                    <span className="md:hidden">Engg</span><span className="hidden md:inline">Engineering</span>
+                                </button>
+                                <button onClick={() => setActiveTab('mgmt')} className={`tab-btn middle snap-start ${activeTab==='mgmt' ? 'active' : ''}`}>
+                                    <span className="md:hidden">Mgmt</span><span className="hidden md:inline">Management</span>
+                                </button>
+                                <button onClick={() => setActiveTab('examEng')} className={`tab-btn middle snap-start ${activeTab==='examEng' ? 'active' : ''}`}>
+                                    <span className="md:hidden">Eng Exams</span><span className="hidden md:inline">Eng Exams</span>
+                                </button>
+                                <button onClick={() => setActiveTab('examMgmt')} className={`tab-btn middle snap-start ${activeTab==='examMgmt' ? 'active' : ''}`}>
+                                    <span className="md:hidden">Mgmt Exams</span><span className="hidden md:inline">Mgmt Exams</span>
+                                </button>
+                                <button onClick={() => setActiveTab('examOther')} className={`tab-btn right snap-start ${activeTab==='examOther' ? 'active' : ''}`}>
+                                    <span className="md:hidden">Others</span><span className="hidden md:inline">Other Exams</span>
+                                </button>
                             </div>
 
                             {/* Search */}
                             <div className="w-full md:w-auto relative group">
-                                <svg className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 z-10 transition duration-300 group-hover:text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                <svg className="absolute left-3 top-2.5 h-4 w-4 md:h-5 md:w-5 text-gray-400 z-10 transition duration-300 group-hover:text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                                 <input
                                     type="text"
                                     placeholder="Search databases..."
-                                    className="search-input !pl-10"
+                                    className="search-input !pl-9 md:!pl-10 text-sm md:text-base"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
@@ -402,7 +540,6 @@
             );
         };
 
-        // Render Immediately
         const rootElement = document.getElementById('root');
         if (rootElement) {
             const root = ReactDOM.createRoot(rootElement);
