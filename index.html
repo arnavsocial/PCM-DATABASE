@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Database 2026</title>
+    <title>College Database 2026 - Final</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -11,15 +11,139 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <style>
-        .tab-active { border-bottom: 4px solid white; font-weight: 700; color: white; }
-        .tab-inactive { color: #bfdbfe; }
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+        body { font-family: "Montserrat", sans-serif; transition: background 0.2s linear; }
+
+        /* Universal Scrollbar Hider to Prevent Jitter */
+        .hide-scroll {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scroll::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+
+        /* Dark Mode Toggle Switch */
+        .checkbox { opacity: 0; position: absolute; }
+        .checkbox-label {
+            background-color: #111; width: 50px; height: 26px; border-radius: 50px;
+            position: relative; padding: 5px; cursor: pointer; display: flex;
+            justify-content: space-between; align-items: center; margin-bottom: 0;
+        }
+        .checkbox-label .ball {
+            background-color: #fff; width: 22px; height: 22px; position: absolute;
+            left: 2px; top: 2px; border-radius: 50%; transition: transform 0.2s linear;
+        }
+        .checkbox:checked + .checkbox-label .ball { transform: translateX(24px); }
+
+        /* Dark Mode Styling Logic */
+        .dark { background-color: #292c35; color: #fff; }
+        .dark .bg-white { background-color: #1e2027 !important; border-color: #3f4451 !important; color: #fff; }
+        .dark .bg-gray-50 { background-color: #292c35 !important; border-color: #3f4451 !important; }
+        .dark .bg-gray-100 { background-color: #22252d !important; border-color: #3f4451 !important; }
+        .dark th { color: #a1a1aa !important; }
+        .dark td { color: #e4e4e7 !important; border-bottom-color: #3f4451 !important; }
+        .dark .text-gray-900, .dark .text-gray-800 { color: #f4f4f5 !important; }
+        .dark .text-gray-600, .dark .text-gray-500 { color: #a1a1aa !important; }
+        .dark .edit-input { background: #3f4451; color: white; border-color: #52525b; }
+        .dark .hover\:bg-blue-50:hover { background-color: #374151 !important; }
+        .dark .social-wrapper .icon { background: #3f4451; color: #fff; }
+
+        /* Neumorphic Card Base */
+        .neu-card {
+            border-radius: 30px;
+            background: #e0e0e0;
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+        }
+        .dark .neu-card {
+            background: #292c35;
+            box-shadow: 15px 15px 40px #1c1e24, -15px -15px 40px #363a46;
+        }
+
+        /* Animated Search Bar */
+        .search-input {
+            border: 2px solid transparent; width: 100%; height: 2.5em; padding-left: 0.8em;
+            outline: none; overflow: hidden; background-color: #f3f3f3;
+            border-radius: 10px; transition: all 0.5s; font-family: inherit;
+        }
+        .search-input:hover, .search-input:focus {
+            border: 2px solid #4a9dec; box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+            background-color: white;
+        }
+        .dark .search-input { background-color: #3f4451; color: white; }
+        .dark .search-input:hover, .dark .search-input:focus { background-color: #1e2027; }
+
+        /* Segmented Options Buttons (Neumorphic Tabs) */
+        .tab-btn {
+            font: inherit; background-color: #f0f0f0; border: 0; color: #242424;
+            font-size: 0.95rem; padding: 0.5em 1.5em; text-shadow: 0 0.0625em 0 #fff;
+            box-shadow: inset 0 0.0625em 0 0 #f4f4f4, 0 0.0625em 0 0 #efefef,
+                0 0.125em 0 0 #ececec, 0 0.25em 0 0 #e0e0e0, 0 0.3125em 0 0 #dedede,
+                0 0.375em 0 0 #dcdcdc, 0 0.425em 0 0 #cacaca, 0 0.425em 0.5em 0 #cecece;
+            transition: 0.23s ease; cursor: pointer; font-weight: bold; margin: -1px; white-space: nowrap;
+        }
+        .tab-btn.left { border-top-left-radius: 0.5em; border-bottom-left-radius: 0.5em; }
+        .tab-btn.middle { border-radius: 0px; }
+        .tab-btn.right { border-top-right-radius: 0.5em; border-bottom-right-radius: 0.5em; }
+        .tab-btn:active, .tab-btn.active {
+            translate: 0 0.225em; letter-spacing: 0.05em; color: skyblue;
+            box-shadow: inset 0 0.03em 0 0 #f4f4f4, 0 0.03em 0 0 #efefef,
+                0 0.0625em 0 0 #ececec, 0 0.125em 0 0 #e0e0e0, 0 0.125em 0 0 #dedede,
+                0 0.2em 0 0 #dcdcdc, 0 0.225em 0 0 #cacaca, 0 0.225em 0.375em 0 #cecece;
+        }
+        /* Dark Mode Tab Overrides */
+        .dark .tab-btn { background-color: #3f4451; color: #d1d5db; box-shadow: none; text-shadow: none; border: 1px solid #2e323b;}
+        .dark .tab-btn.active { color: #60a5fa; background-color: #1e2027; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); }
+
+        /* Animated Social Icons */
+        .social-wrapper { display: inline-flex; list-style: none; gap: 12px; padding: 0; margin: 0; }
+        .social-wrapper .icon {
+            position: relative; background: #fff; border-radius: 50%; padding: 8px;
+            width: 35px; height: 35px; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55); color: #333;
+        }
+        .social-wrapper .tooltip {
+            position: absolute; top: 0; font-size: 12px; background: #fff; color: #fff;
+            padding: 5px 8px; border-radius: 5px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            white-space: nowrap; z-index: 20;
+        }
+        .social-wrapper .icon:hover .tooltip { top: -40px; opacity: 1; visibility: visible; pointer-events: auto; }
+        .social-wrapper .facebook:hover, .social-wrapper .facebook:hover .tooltip { background: #1877F2; color: #fff; }
+        .social-wrapper .twitter:hover, .social-wrapper .twitter:hover .tooltip { background: #1DA1F2; color: #fff; }
+        .social-wrapper .instagram:hover, .social-wrapper .instagram:hover .tooltip { background: #E4405F; color: #fff; }
+        .social-wrapper .github:hover, .social-wrapper .github:hover .tooltip { background: #333; color: #fff; }
+
+        /* Top Action Buttons (Edit/CSV) */
+        .action-btn {
+            display: flex; align-items: center; gap: 6px; padding: 8px 16px;
+            border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;
+            transition: transform 0.2s, background 0.2s; background-color: #3b82f6; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .action-btn:hover { transform: scale(1.05); }
+        .action-btn svg { width: 18px; height: 18px; fill: currentColor; }
+        .action-btn.edit { background-color: #f59e0b; color: #fff; }
+        .action-btn.download { background-color: #10b981; }
+
+        /* Uiverse Apply Now Button (For Table Links) */
+        .apply-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+            padding: 6px 12px; border-radius: 8px; background-color: #2563eb; 
+            color: white; font-weight: 600; font-size: 0.75rem; border: none; 
+            cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+        }
+        .apply-btn:hover { background-color: #1d4ed8; transform: scale(1.05); }
+        .apply-btn .icon { width: 14px; height: 14px; fill: currentColor; }
+
+        /* Utils */
         .edit-input { width: 100%; border: 1px solid #cbd5e1; border-radius: 4px; padding: 2px 4px; color: black; }
         .sticky-col-shadow { box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1); }
-        .mobile-scroll-x::-webkit-scrollbar { height: 6px; }
-        .mobile-scroll-x::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .dark .sticky-col-shadow { box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.5); }
     </style>
 </head>
-<body>
+<body id="main-body" class="bg-gray-100">
     <div id="root"></div>
 
     <script src="engData.js"></script>
@@ -28,171 +152,170 @@
     <script src="mgmtExams.js"></script>
     <script src="otherExams.js"></script> 
 
-    <script type="text/babel" src="logic.js"></script>
-
     <script type="text/babel">
-        // --- ICONS ---
-        const IconGithub = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.011-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.218.694.825.576C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12"/></svg>;
-        const IconEdit = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>;
-        const IconCheck = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>;
-        const IconDownload = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>;
-        const IconSearch = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>;
-        const IconBuilding = () => <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>;
-        const IconTrending = () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>;
-        const IconStar = () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
-        const IconGmail = () => <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>;
-        const IconInstagram = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>;
+        const { useState, useEffect } = React;
 
-        // --- MAIN APP COMPONENT ---
-        const CollegeApp = () => {
-            // Destructure EVERYTHING we need from our custom hook
-            const {
-                activeTab, setActiveTab,
-                search, setSearch,
-                isEditMode, setIsEditMode,
-                currentDate,
+        // --- THE HOOK LOGIC ---
+        const useCollegeLogic = () => {
+            const [activeTab, setActiveTab] = useState('eng'); 
+            const [search, setSearch] = useState('');
+            const [isEditMode, setIsEditMode] = useState(false);
+            const [currentDate, setCurrentDate] = useState(new Date());
+
+            const [engData, setEngData] = useState(typeof window.initialEngData !== 'undefined' ? window.initialEngData : []);
+            const [mgmtData, setMgmtData] = useState(typeof window.initialMgmtData !== 'undefined' ? window.initialMgmtData : []);
+            const [engExamData, setEngExamData] = useState(typeof window.initialEngExams !== 'undefined' ? window.initialEngExams : []);
+            const [mgmtExamData, setMgmtExamData] = useState(typeof window.initialMgmtExams !== 'undefined' ? window.initialMgmtExams : []);
+            const [otherExamData, setOtherExamData] = useState(typeof window.initialOtherExams !== 'undefined' ? window.initialOtherExams : []);
+
+            useEffect(() => {
+                const timer = setInterval(() => setCurrentDate(new Date()), 60000);
+                return () => clearInterval(timer);
+            }, []);
+
+            const updateEng = (id, field, val) => setEngData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+            const updateMgmt = (id, field, val) => setMgmtData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+            const updateExam = (id, type, field, val) => {
+                if (type === 'eng') setEngExamData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+                else if (type === 'mgmt') setMgmtExamData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+                else setOtherExamData(prev => prev.map(item => item.id === id ? { ...item, [field]: val } : item));
+            };
+
+            const filterList = (list) => {
+                if (!list) return [];
+                const s = search.toLowerCase();
+                return list.filter(item => {
+                    return (item.name && item.name.toLowerCase().includes(s)) || 
+                           (item.location && item.location.toLowerCase().includes(s)) || 
+                           (item.entrance && item.entrance.toLowerCase().includes(s));
+                });
+            };
+
+            const formatCurrency = (val) => val ? `₹${val} L` : 'N/A';
+            const formatPkg = (val) => val ? `₹${val} LPA` : 'N/A';
+            const sortColleges = (colleges) => [...colleges].sort((a, b) => (b.popScore || 0) - (a.popScore || 0));
+
+            // EXAM SORTING & STATUS
+            const getLiveStatus = (exam) => {
+                const today = new Date(currentDate); 
+                today.setHours(0,0,0,0);
+                const start = new Date(exam.regStart);
+                const end = new Date(exam.regEnd);
+                
+                if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+                    return { label: "Date Error", color: "bg-gray-100", priority: 5 };
+                }
+
+                start.setHours(0,0,0,0); end.setHours(0,0,0,0);
+                const msPerDay = 1000 * 60 * 60 * 24;
+                const diffDays = Math.ceil((end.getTime() - today.getTime()) / msPerDay);
+
+                if (today > end) return { label: `Closed`, color: 'bg-gray-200 text-gray-600 border border-gray-300', priority: 4 };
+                if (today >= start && diffDays >= 0 && diffDays <= 10) return { label: `Closing in ${diffDays} Days`, color: 'bg-red-100 text-red-700 border border-red-200', priority: 1 };
+                if (today >= start && today <= end) return { label: `Opened ${exam.regStart}`, color: 'bg-green-100 text-green-700 border border-green-200', priority: 2 };
+                if (today < start) return { label: `Opens ${exam.regStart}`, color: 'bg-blue-100 text-blue-700 border border-blue-200', priority: 3 };
+                
+                return { label: "Unknown", color: "bg-gray-100", priority: 5 };
+            };
+
+            const sortExams = (exams) => {
+                return [...exams].sort((a, b) => {
+                    const statA = getLiveStatus(a);
+                    const statB = getLiveStatus(b);
+                    if (statA.priority !== statB.priority) return statA.priority - statB.priority;
+                    
+                    const startA = new Date(a.regStart).getTime() || 0;
+                    const startB = new Date(b.regStart).getTime() || 0;
+                    const endA = new Date(a.regEnd).getTime() || Number.MAX_SAFE_INTEGER;
+                    const endB = new Date(b.regEnd).getTime() || Number.MAX_SAFE_INTEGER;
+
+                    if (statA.priority === 3) return startA - startB;
+                    if (statA.priority === 4) return endB - endA; 
+                    return endA - endB;
+                });
+            };
+
+            const downloadCSV = () => alert("CSV Download Triggered");
+
+            return {
+                activeTab, setActiveTab, search, setSearch,
+                isEditMode, setIsEditMode, currentDate,
                 engData, mgmtData, engExamData, mgmtExamData, otherExamData,
-                updateEng, updateMgmt, updateExam,
-                filterList, formatCurrency, formatPkg,
-                sortColleges, getLiveStatus, sortExams,
-                downloadCSV
-            } = window.useCollegeLogic();
+                updateEng, updateMgmt, updateExam, filterList, formatCurrency, formatPkg, sortColleges, sortExams, getLiveStatus, downloadCSV
+            };
+        };
 
-            // --- RENDER FUNCTIONS FOR TABLES ---
-            const renderEngTable = () => (
-                <div className="overflow-x-auto min-h-[500px] mobile-scroll-x">
+        // --- ICONS ---
+        const IconEdit = () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>;
+        const IconCheck = () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>;
+        const IconDownload = () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>;
+        const IconBuilding = () => <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>;
+
+        // --- MAIN COMPONENT ---
+        const CollegeApp = () => {
+            const {
+                activeTab, setActiveTab, search, setSearch,
+                isEditMode, setIsEditMode, currentDate,
+                engData, mgmtData, engExamData, mgmtExamData, otherExamData,
+                updateEng, updateMgmt, updateExam, filterList, formatCurrency, formatPkg, 
+                sortColleges, sortExams, getLiveStatus, downloadCSV
+            } = useCollegeLogic();
+
+            const [isDark, setIsDark] = useState(false);
+
+            useEffect(() => {
+                const body = document.getElementById('main-body');
+                if (isDark) body.classList.add('dark'); 
+                else body.classList.remove('dark');
+            }, [isDark]);
+
+            // TABLE: COLLEGES
+            const renderCollegeTable = (data, updateFunc) => (
+                <div className="overflow-x-auto min-h-[500px] hide-scroll">
                     <table className="w-full text-left border-collapse min-w-[800px] md:min-w-full">
                         <thead>
                             <tr className="bg-gray-50 text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
-                                <th className="p-2 md:p-4 font-bold sticky left-0 bg-gray-50 z-10 w-10 md:w-12 sticky-col-shadow md:shadow-none">#</th>
+                                <th className="p-2 md:p-4 font-bold sticky left-0 z-10 w-10 md:w-12 sticky-col-shadow md:shadow-none bg-gray-50">#</th>
                                 <th className="p-2 md:p-4 font-bold min-w-[160px] md:min-w-[200px]">College Name</th>
                                 <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[140px]">Entrance / Reg</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Fees (4Y)</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Fees</th>
                                 <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Avg Pkg</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center bg-blue-50">Val</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center bg-green-50">Pop</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center">Val</th>
+                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center">Pop</th>
                                 <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[150px]">Location & Tier</th>
                                 <th className="p-2 md:p-4 font-bold min-w-[200px] md:min-w-[250px]">Notes</th>
                             </tr>
                         </thead>
                         <tbody className="text-sm divide-y divide-gray-100">
-                            {sortColleges(filterList(engData)).map((col, index) => (
-                                <tr key={col.id} className="hover:bg-blue-50 transition-colors duration-150">
-                                    <td className="p-2 md:p-4 font-medium text-gray-500 sticky left-0 bg-white hover:bg-blue-50 z-10 sticky-col-shadow md:shadow-none">{index + 1}</td>
+                            {data.length === 0 ? (
+                                <tr><td colSpan="9" className="text-center p-8 text-gray-500">No data loaded or empty. Check data files.</td></tr>
+                            ) : sortColleges(filterList(data)).map((col, index) => (
+                                <tr key={col.id} className="hover:bg-blue-50 transition-colors duration-150 bg-white">
+                                    <td className="p-2 md:p-4 font-medium text-gray-500 sticky left-0 z-10 sticky-col-shadow md:shadow-none bg-white">{index + 1}</td>
                                     <td className="p-2 md:p-4">
                                         <div className="font-bold text-gray-900 text-sm md:text-base">
-                                            {isEditMode ? <input className="edit-input" value={col.name || ''} onChange={e => updateEng(col.id, 'name', e.target.value)} /> : col.name}
-                                        </div>
-                                        <div className="text-xs text-blue-600 font-semibold mt-1">
-                                            {isEditMode ? <input className="edit-input w-16" value={col.collegeTier || ''} onChange={e => updateEng(col.id, 'collegeTier', e.target.value)} /> : col.collegeTier}
+                                            {isEditMode ? <input className="edit-input" value={col.name || ''} onChange={e => updateFunc(col.id, 'name', e.target.value)} /> : col.name}
                                         </div>
                                     </td>
                                     <td className="p-2 md:p-4">
-                                        <div className="font-semibold text-blue-700 text-xs md:text-sm">
-                                            {isEditMode ? <input className="edit-input" value={col.entrance || ''} onChange={e => updateEng(col.id, 'entrance', e.target.value)} /> : col.entrance}
-                                        </div>
-                                        <div className="text-[10px] md:text-xs text-gray-500 mt-1 whitespace-nowrap">
-                                             {isEditMode ? <input className="edit-input" value={col.regDetails || ''} onChange={e => updateEng(col.id, 'regDetails', e.target.value)} /> : col.regDetails}
+                                        <div className="font-semibold text-blue-600 text-xs md:text-sm">
+                                            {isEditMode ? <input className="edit-input" value={col.entrance || ''} onChange={e => updateFunc(col.id, 'entrance', e.target.value)} /> : col.entrance}
                                         </div>
                                     </td>
-                                    <td className="p-2 md:p-4 text-right font-medium text-red-600 whitespace-nowrap">
-                                        {isEditMode ? <input className="edit-input text-right" value={col.fees || ''} onChange={e => updateEng(col.id, 'fees', e.target.value)} /> : formatCurrency(col.fees)}
+                                    <td className="p-2 md:p-4 text-right font-medium text-red-500 whitespace-nowrap">
+                                        {isEditMode ? <input className="edit-input text-right" value={col.fees || ''} onChange={e => updateFunc(col.id, 'fees', e.target.value)} /> : formatCurrency(col.fees)}
                                     </td>
-                                    <td className="p-2 md:p-4 text-right font-bold text-green-700 whitespace-nowrap">
-                                        {isEditMode ? <input className="edit-input text-right" value={col.package || ''} onChange={e => updateEng(col.id, 'package', e.target.value)} /> : formatPkg(col.package)}
+                                    <td className="p-2 md:p-4 text-right font-bold text-green-600 whitespace-nowrap">
+                                        {isEditMode ? <input className="edit-input text-right" value={col.package || ''} onChange={e => updateFunc(col.id, 'package', e.target.value)} /> : formatPkg(col.package)}
                                     </td>
-                                    <td className="p-2 md:p-4 text-center bg-blue-50/50">
-                                        <span className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold ${col.valScore >= 90 ? 'bg-blue-200 text-blue-800' : 'bg-gray-200 text-gray-800'}`}>
-                                            {col.valScore || '-'}
-                                        </span>
+                                    <td className="p-2 md:p-4 text-center">
+                                        <span className="px-1.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">{col.valScore || '-'}</span>
                                     </td>
-                                    <td className="p-2 md:p-4 text-center bg-green-50/50">
-                                        <span className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold ${col.popScore >= 90 ? 'bg-green-200 text-green-800' : 'bg-gray-200 text-gray-800'}`}>
-                                            {col.popScore || '-'}
-                                        </span>
+                                    <td className="p-2 md:p-4 text-center">
+                                        <span className="px-1.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800">{col.popScore || '-'}</span>
                                     </td>
-                                    <td className="p-2 md:p-4">
-                                        <div className="text-gray-900 font-medium text-xs md:text-sm">
-                                             {isEditMode ? <input className="edit-input" value={col.location || ''} onChange={e => updateEng(col.id, 'location', e.target.value)} /> : col.location}
-                                        </div>
-                                        <div className="text-[10px] md:text-xs text-gray-500 mt-1 whitespace-nowrap">
-                                            Tier {isEditMode ? <input className="edit-input w-8" value={col.cityTier || ''} onChange={e => updateEng(col.id, 'cityTier', e.target.value)} /> : col.cityTier}
-                                        </div>
-                                    </td>
-                                    <td className="p-2 md:p-4 text-gray-600 italic border-l border-gray-100 text-xs md:text-sm min-w-[200px]">
-                                         {isEditMode ? <input className="edit-input" value={col.notes || ''} onChange={e => updateEng(col.id, 'notes', e.target.value)} /> : `"${col.notes}"`}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                    {filterList(engData).length === 0 && <div className="p-8 text-center text-gray-500">No matching colleges found.</div>}
-                </div>
-            );
-
-            const renderMgmtTable = () => (
-                <div className="overflow-x-auto min-h-[500px] mobile-scroll-x">
-                    <table className="w-full text-left border-collapse min-w-[800px] md:min-w-full">
-                         <thead>
-                            <tr className="bg-gray-50 text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
-                                <th className="p-2 md:p-4 font-bold sticky left-0 bg-gray-50 z-10 w-10 md:w-12 sticky-col-shadow md:shadow-none">#</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[160px] md:min-w-[200px]">College Name</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[140px]">Entrance / Reg</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Fees (3Y)</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[100px] md:min-w-[120px] text-right">Avg Pkg</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center bg-blue-50">Val</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[60px] md:min-w-[80px] text-center bg-green-50">Pop</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[120px] md:min-w-[150px]">Location & Tier</th>
-                                <th className="p-2 md:p-4 font-bold min-w-[200px] md:min-w-[250px]">Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-sm divide-y divide-gray-100">
-                            {sortColleges(filterList(mgmtData)).map((col, index) => (
-                                <tr key={col.id} className="hover:bg-blue-50 transition-colors duration-150">
-                                    <td className="p-2 md:p-4 font-medium text-gray-500 sticky left-0 bg-white hover:bg-blue-50 z-10 sticky-col-shadow md:shadow-none">{index + 1}</td>
-                                    <td className="p-2 md:p-4">
-                                        <div className="font-bold text-gray-900 text-sm md:text-base">
-                                            {isEditMode ? <input className="edit-input" value={col.name || ''} onChange={e => updateMgmt(col.id, 'name', e.target.value)} /> : col.name}
-                                        </div>
-                                        <div className="text-xs text-blue-600 font-semibold mt-1">
-                                            {isEditMode ? <input className="edit-input w-16" value={col.collegeTier || ''} onChange={e => updateMgmt(col.id, 'collegeTier', e.target.value)} /> : col.collegeTier}
-                                        </div>
-                                    </td>
-                                    <td className="p-2 md:p-4">
-                                        <div className="font-semibold text-blue-700 text-xs md:text-sm">
-                                            {isEditMode ? <input className="edit-input" value={col.entrance || ''} onChange={e => updateMgmt(col.id, 'entrance', e.target.value)} /> : col.entrance}
-                                        </div>
-                                        <div className="text-[10px] md:text-xs text-gray-500 mt-1 whitespace-nowrap">
-                                             {isEditMode ? <input className="edit-input" value={col.regDetails || ''} onChange={e => updateMgmt(col.id, 'regDetails', e.target.value)} /> : col.regDetails}
-                                        </div>
-                                    </td>
-                                    <td className="p-2 md:p-4 text-right font-medium text-red-600 whitespace-nowrap">
-                                        {isEditMode ? <input className="edit-input text-right" value={col.fees || ''} onChange={e => updateMgmt(col.id, 'fees', e.target.value)} /> : formatCurrency(col.fees)}
-                                    </td>
-                                    <td className="p-2 md:p-4 text-right font-bold text-green-700 whitespace-nowrap">
-                                        {isEditMode ? <input className="edit-input text-right" value={col.package || ''} onChange={e => updateMgmt(col.id, 'package', e.target.value)} /> : formatPkg(col.package)}
-                                    </td>
-                                    <td className="p-2 md:p-4 text-center bg-blue-50/50">
-                                        <span className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold ${col.valScore >= 90 ? 'bg-blue-200 text-blue-800' : 'bg-gray-200 text-gray-800'}`}>
-                                            {col.valScore || '-'}
-                                        </span>
-                                    </td>
-                                    <td className="p-2 md:p-4 text-center bg-green-50/50">
-                                        <span className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded-full text-[10px] md:text-xs font-bold ${col.popScore >= 90 ? 'bg-green-200 text-green-800' : 'bg-gray-200 text-gray-800'}`}>
-                                            {col.popScore || '-'}
-                                        </span>
-                                    </td>
-                                    <td className="p-2 md:p-4">
-                                        <div className="text-gray-900 font-medium text-xs md:text-sm">
-                                             {isEditMode ? <input className="edit-input" value={col.location || ''} onChange={e => updateMgmt(col.id, 'location', e.target.value)} /> : col.location}
-                                        </div>
-                                        <div className="text-[10px] md:text-xs text-gray-500 mt-1 whitespace-nowrap">
-                                            Tier {isEditMode ? <input className="edit-input w-8" value={col.cityTier || ''} onChange={e => updateMgmt(col.id, 'cityTier', e.target.value)} /> : col.cityTier}
-                                        </div>
-                                    </td>
-                                    <td className="p-2 md:p-4 text-gray-600 italic border-l border-gray-100 text-xs md:text-sm min-w-[200px]">
-                                         {isEditMode ? <input className="edit-input" value={col.notes || ''} onChange={e => updateMgmt(col.id, 'notes', e.target.value)} /> : `"${col.notes}"`}
-                                    </td>
+                                    <td className="p-2 md:p-4 text-gray-800">{col.location}</td>
+                                    <td className="p-2 md:p-4 text-gray-500 italic">"{col.notes}"</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -200,49 +323,57 @@
                 </div>
             );
 
+            // TABLE: EXAMS
             const renderExamTable = (data, type) => {
                 const filtered = filterList(data);
                 const sorted = sortExams(filtered);
-                const displayDate = currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-
+                
                 return (
-                    <div className="overflow-x-auto bg-white rounded-lg border border-gray-200 mobile-scroll-x">
-                        <table className="w-full text-left text-sm min-w-[600px] md:min-w-full">
-                            <thead className="bg-gray-50 text-gray-600 font-semibold border-b">
-                                <tr>
-                                    <th className="p-3 md:p-4">Live Status ({displayDate})</th>
-                                    <th className="p-3 md:p-4">Exam Name</th>
-                                    <th className="p-3 md:p-4">Reg Start</th>
-                                    <th className="p-3 md:p-4">Reg End</th>
-                                    <th className="p-3 md:p-4">Exam Date</th>
-                                    <th className="p-3 md:p-4">Link</th>
+                    <div className="overflow-x-auto min-h-[500px] hide-scroll">
+                        <table className="w-full text-left border-collapse min-w-[700px] md:min-w-full">
+                            <thead>
+                                <tr className="bg-gray-50 text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
+                                    <th className="p-3 md:p-4 font-bold w-32">Status</th>
+                                    <th className="p-3 md:p-4 font-bold min-w-[200px]">Exam Name</th>
+                                    <th className="p-3 md:p-4 font-bold w-32">Reg Start</th>
+                                    <th className="p-3 md:p-4 font-bold w-32">Reg End</th>
+                                    <th className="p-3 md:p-4 font-bold w-32">Exam Date</th>
+                                    <th className="p-3 md:p-4 font-bold text-center w-32">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-100">
-                                {sorted.map((ex) => {
+                            <tbody className="text-sm divide-y divide-gray-100">
+                                {data.length === 0 ? (
+                                    <tr><td colSpan="6" className="text-center p-8 text-gray-500">No data loaded or empty.</td></tr>
+                                ) : sorted.map((ex) => {
                                     const statusDetails = getLiveStatus(ex);
-                                    
                                     return (
-                                        <tr key={ex.id} className="hover:bg-gray-50">
+                                        <tr key={ex.id} className="hover:bg-blue-50 transition-colors duration-150 bg-white">
                                             <td className="p-3 md:p-4">
                                                 <span className={`px-2 py-1 rounded-md text-[10px] md:text-xs font-bold border-0 whitespace-nowrap ${statusDetails.color}`}>
                                                     {statusDetails.label}
                                                 </span>
                                             </td>
-                                            <td className="p-3 md:p-4 font-medium text-gray-900 text-sm md:text-base">
+                                            <td className="p-3 md:p-4 font-bold text-gray-900 text-sm md:text-base">
                                                 {isEditMode ? <input className="edit-input" value={ex.name || ''} onChange={e => updateExam(ex.id, type, 'name', e.target.value)} /> : ex.name}
                                             </td>
-                                            <td className="p-3 md:p-4 text-gray-500 font-medium text-xs md:text-sm whitespace-nowrap">
+                                            <td className="p-3 md:p-4 text-gray-500 font-medium whitespace-nowrap">
                                                 {isEditMode ? <input className="edit-input" value={ex.regStart || ''} onChange={e => updateExam(ex.id, type, 'regStart', e.target.value)} /> : ex.regStart}
                                             </td>
-                                            <td className="p-3 md:p-4 text-gray-800 font-semibold text-xs md:text-sm whitespace-nowrap">
+                                            <td className="p-3 md:p-4 text-gray-800 font-semibold whitespace-nowrap">
                                                 {isEditMode ? <input className="edit-input" value={ex.regEnd || ''} onChange={e => updateExam(ex.id, type, 'regEnd', e.target.value)} /> : ex.regEnd}
                                             </td>
-                                            <td className="p-3 md:p-4 text-gray-600 text-xs md:text-sm whitespace-nowrap">
+                                            <td className="p-3 md:p-4 text-gray-600 whitespace-nowrap">
                                                 {isEditMode ? <input className="edit-input" value={ex.examDate || ''} onChange={e => updateExam(ex.id, type, 'examDate', e.target.value)} /> : ex.examDate}
                                             </td>
-                                            <td className="p-3 md:p-4 text-blue-500 hover:underline text-xs md:text-sm">
-                                                {isEditMode ? <input className="edit-input" value={ex.link || ''} onChange={e => updateExam(ex.id, type, 'link', e.target.value)} /> : <a href={`https://${ex.link}`} target="_blank" rel="noreferrer">Website</a>}
+                                            <td className="p-3 md:p-4 text-center">
+                                                {isEditMode ? (
+                                                    <input className="edit-input" value={ex.link || ''} onChange={e => updateExam(ex.id, type, 'link', e.target.value)} placeholder="Website Link" />
+                                                ) : (
+                                                    <a href={`https://${ex.link}`} target="_blank" rel="noreferrer" className="apply-btn">
+                                                        Apply
+                                                        <svg fill="currentColor" viewBox="0 0 24 24" class="icon"><path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path></svg>
+                                                    </a>
+                                                )}
                                             </td>
                                         </tr>
                                     );
@@ -253,115 +384,95 @@
                 );
             };
 
-            // --- MAIN RENDER ---
             return (
-                <div className="min-h-screen p-2 md:p-6 font-sans text-gray-800 bg-[#f8fafc]">
-                    <div className="max-w-7xl mx-auto bg-white shadow-xl rounded-none md:rounded-xl overflow-hidden border border-gray-200">
+                <div className="min-h-screen p-4 md:p-8 flex justify-center items-start">
+                    <div className="w-full max-w-7xl neu-card overflow-hidden !p-0 flex flex-col">
                         
-                        {/* Header: Blue Style */}
-                        <div className="bg-blue-900 text-white p-4 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <div className="w-full md:w-auto">
-                                <h1 className="text-xl md:text-3xl font-bold flex items-center gap-2">
-                                    <IconBuilding />
-                                    Exam and College Database
-                                </h1>
-                                <p className="text-blue-200 mt-2 text-xs md:text-sm">
-                                    Database for Top Private Colleges and Exams in ONE Place. Updated for 2026.
-                                </p>
+                        {/* Header Area */}
+                        <div className="p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                            <div className="flex items-center gap-4">
+                                <IconBuilding className="text-blue-500" />
+                                <div>
+                                    <h1 className="text-2xl md:text-3xl font-bold text-gray-800 tracking-wide">College Database 2026</h1>
+                                    <p className="text-gray-500 text-sm mt-1">Top Private Colleges & Exams in ONE Place.</p>
+                                </div>
                             </div>
-                            <div className="flex flex-wrap gap-3 items-center w-full md:w-auto justify-between md:justify-end">
-                                {/* Social Buttons */}
-                                <div className="flex gap-4 mr-2">
-                                    <a href="https://www.instagram.com/arnavsocial/" className="text-white hover:text-gray-300 transition-colors" title="Instagram">
-                                        <IconInstagram />
-                                    </a>
-                                    <a href="https://github.com/arnavsocial" className="text-white hover:text-gray-300 transition-colors" title="GitHub">
-                                        <IconGithub />
-                                    </a>
-                                    <a href="https://www.potato.com" target="_blank" className="text-white hover:text-gray-300 transition-colors" title="Gmail">
-                                        <IconGmail />
-                                    </a>
+
+                            <div className="flex flex-wrap items-center gap-6 justify-center">
+                                {/* Dark Mode Switch */}
+                                <div className="flex items-center gap-2">
+                                    <input type="checkbox" id="dark-toggle" className="checkbox" checked={isDark} onChange={() => setIsDark(!isDark)} />
+                                    <label htmlFor="dark-toggle" className="checkbox-label shadow-sm">
+                                        <span className="text-[10px] ml-1">🌙</span>
+                                        <span className="text-[10px] mr-1">☀️</span>
+                                        <span className="ball shadow-md"></span>
+                                    </label>
                                 </div>
 
+                                {/* Social Icons */}
+                                <ul className="social-wrapper">
+                                    <li className="icon github">
+                                        <span className="tooltip">GitHub</span>
+                                        <svg viewBox="0 0 24 24" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.011-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.218.694.825.576C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12"/></svg>
+                                    </li>
+                                    <li className="icon facebook">
+                                        <span className="tooltip">Facebook</span>
+                                        <svg viewBox="0 0 320 512" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path></svg>
+                                    </li>
+                                    <li className="icon twitter">
+                                        <span className="tooltip">Twitter</span>
+                                        <svg height="1.2em" fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"></path></svg>
+                                    </li>
+                                    <li className="icon instagram">
+                                        <span className="tooltip">Instagram</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path></svg>
+                                    </li>
+                                </ul>
+
+                                {/* Action Buttons */}
                                 <div className="flex gap-2">
-                                    <button 
-                                        onClick={() => setIsEditMode(!isEditMode)} 
-                                        className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 text-sm md:text-base rounded-lg font-medium transition-colors ${isEditMode ? 'bg-amber-400 text-amber-900 border-none' : 'bg-blue-800 text-blue-100 hover:bg-blue-700 border border-blue-700'}`}
-                                    >
+                                    <button onClick={() => setIsEditMode(!isEditMode)} className={`action-btn ${isEditMode ? 'edit' : ''}`}>
                                         {isEditMode ? <><IconCheck /> Done</> : <><IconEdit /> Edit</>}
                                     </button>
-                                    <button 
-                                        onClick={downloadCSV}
-                                        className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-1.5 px-3 md:py-2 md:px-4 text-sm md:text-base rounded-lg shadow-lg transition-colors duration-200"
-                                    >
+                                    <button onClick={downloadCSV} className="action-btn download">
                                         <IconDownload /> CSV
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Navigation Tabs */}
-                        <div className="bg-blue-800 px-2 md:px-6 flex gap-4 text-sm overflow-x-auto no-scrollbar">
-                            <button onClick={() => setActiveTab('eng')} className={`py-3 px-2 whitespace-nowrap transition-colors flex-shrink-0 ${activeTab==='eng' ? 'tab-active' : 'tab-inactive'}`}>
-                                Engineering Colleges
-                            </button>
-                            <button onClick={() => setActiveTab('mgmt')} className={`py-3 px-2 whitespace-nowrap transition-colors flex-shrink-0 ${activeTab==='mgmt' ? 'tab-active' : 'tab-inactive'}`}>
-                                Management Colleges
-                            </button>
-                            <button onClick={() => setActiveTab('examEng')} className={`py-3 px-2 whitespace-nowrap transition-colors flex-shrink-0 ${activeTab==='examEng' ? 'tab-active' : 'tab-inactive'}`}>
-                                Exams (Engg)
-                            </button>
-                            <button onClick={() => setActiveTab('examMgmt')} className={`py-3 px-2 whitespace-nowrap transition-colors flex-shrink-0 ${activeTab==='examMgmt' ? 'tab-active' : 'tab-inactive'}`}>
-                                Exams (Mgmt)
-                            </button>
-                            <button onClick={() => setActiveTab('examOther')} className={`py-3 px-2 whitespace-nowrap transition-colors flex-shrink-0 ${activeTab==='examOther' ? 'tab-active' : 'tab-inactive'}`}>
-                                Other Exams
-                            </button>
-                        </div>
+                        {/* Middle Control Bar */}
+                        <div className="px-6 md:px-8 pb-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                            
+                            {/* Segemented Options wrapper -> Scrollbars hidden here! */}
+                            <div className="flex w-full md:w-auto overflow-x-auto overflow-y-hidden hide-scroll py-2 pl-1">
+                                <button onClick={() => setActiveTab('eng')} className={`tab-btn left ${activeTab==='eng' ? 'active' : ''}`}>Engineering</button>
+                                <button onClick={() => setActiveTab('mgmt')} className={`tab-btn middle ${activeTab==='mgmt' ? 'active' : ''}`}>Management</button>
+                                <button onClick={() => setActiveTab('examEng')} className={`tab-btn middle ${activeTab==='examEng' ? 'active' : ''}`}>Eng Exams</button>
+                                <button onClick={() => setActiveTab('examMgmt')} className={`tab-btn middle ${activeTab==='examMgmt' ? 'active' : ''}`}>Mgmt Exams</button>
+                                <button onClick={() => setActiveTab('examOther')} className={`tab-btn right ${activeTab==='examOther' ? 'active' : ''}`}>Other Exams</button>
+                            </div>
 
-                        {/* Controls & Search */}
-                        <div className="p-4 bg-gray-100 border-b border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
-                            <div className="relative w-full md:w-1/3">
-                                <span className="absolute left-3 top-2.5 h-5 w-5 text-gray-400">
-                                    <IconSearch />
-                                </span>
+                            {/* Search */}
+                            <div className="w-full md:w-auto relative group">
+                                <svg className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 z-10 transition duration-300 group-hover:text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                                 <input
                                     type="text"
-                                    placeholder={activeTab.includes('exam') ? "Search Exams..." : "Search Colleges..."}
-                                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm md:text-base"
+                                    placeholder="Search databases..."
+                                    className="search-input !pl-10"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            
-                             <div className="flex gap-2 w-full md:w-auto justify-center md:justify-end">
-                                {(activeTab === 'eng' || activeTab === 'mgmt') && (
-                                    <div className="flex gap-4 text-xs text-gray-600 items-center">
-                                        <div className="flex items-center gap-1"><span className="text-amber-500"><IconStar /></span> <span>Tier 1</span></div>
-                                        <div className="flex items-center gap-1"><span className="text-blue-500"><IconTrending /></span> <span>Value &gt; 90</span></div>
-                                    </div>
-                                )}
-                                {(activeTab === 'examEng' || activeTab === 'examMgmt' || activeTab === 'examOther') && (
-                                    <div className="flex gap-3 text-[10px] md:text-xs text-gray-600 items-center">
-                                        <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500"></span> <span>Closing Soon</span></div>
-                                        <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-500"></span> <span>Open</span></div>
-                                        <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-500"></span> <span>Upcoming</span></div>
-                                    </div>
-                                )}
-                            </div>
                         </div>
 
-                        {/* Content Area */}
-                        <div className="bg-white">
-                            {activeTab === 'eng' && renderEngTable()}
-                            {activeTab === 'mgmt' && renderMgmtTable()}
+                        {/* Display Canvas */}
+                        <div className="bg-white border-t border-gray-200 flex-grow">
+                            {activeTab === 'eng' && renderCollegeTable(engData, updateEng)}
+                            {activeTab === 'mgmt' && renderCollegeTable(mgmtData, updateMgmt)}
                             {activeTab === 'examEng' && renderExamTable(engExamData, 'eng')}
                             {activeTab === 'examMgmt' && renderExamTable(mgmtExamData, 'mgmt')}
                             {activeTab === 'examOther' && renderExamTable(otherExamData, 'other')}
-                        </div>
-                        
-                        <div className="p-4 bg-gray-100 text-center text-[10px] md:text-xs text-gray-500 border-t border-gray-200">
-                            *Data is generally accurate but may contain minor inaccuracies. This is a baseline reference only.
                         </div>
                     </div>
                 </div>
@@ -373,8 +484,6 @@
         if (rootElement) {
             const root = ReactDOM.createRoot(rootElement);
             root.render(<CollegeApp />);
-        } else {
-            console.error("Could not find the 'root' element in index.html");
         }
     </script>
 </body>
