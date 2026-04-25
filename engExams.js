@@ -32,3 +32,15 @@ const initialEngExams = [
     { id: 31, name: "PERA CET 2026", regStart: "Jun 03, 2026", regEnd: "Jun 25, 2026", examDate: "TBA", link: "peracets.com" },
     { id: 32, name: "AP EAMCET 2026", regStart: "Feb 04, 2026", regEnd: "Mar 17, 2026", examDate: "May 2026", link: "cets.apsche.ap.gov.in" },
     { id: 33, name: "UGEE (IIIT Hyderabad)", regStart: "Feb 11, 2026", regEnd: "Mar 31, 2026", examDate: "May 2026", link: "ugadmissions.iiit.ac.in" },
+    { id: 34, name: "BIT Mesra BEEE 2026", regStart: "Feb 01, 2026", regEnd: "Apr 30, 2026", examDate: "May 2026", link: "bitmesra.ac.in" },
+    { id: 35, name: "SRMJEEE 2026 (Phase 1)", regStart: "Nov 03, 2025", regEnd: "Apr 16, 2026", examDate: "Apr 24-29, 2026", link: "srmist.edu.in" },
+    { id: 36, name: "SRMJEEE 2026 (Phase 2)", regStart: "Nov 03, 2025", regEnd: "Jun 04, 2026", examDate: "Jun 10-15, 2026", link: "srmist.edu.in" },
+    { id: 37, name: "SRMJEEE 2026 (Phase 3)", regStart: "Nov 03, 2025", regEnd: "Jun 30, 2026", examDate: "Jul 04-05, 2026", link: "srmist.edu.in" },
+    { id: 38, name: "BITSAT 2026 (Session 2)", regStart: "Apr 20, 2026", regEnd: "May 02, 2026", examDate: "May 24-26, 2026", link: "bitsadmission.com" },
+    { id: 39, name: "IIT Patna BS CET (Phase 1)", regStart: "Apr 01, 2026", regEnd: "May 31, 2026", examDate: "Jun 21, 2026", link: "iitp.ac.in" },
+    { id: 40, name: "IIT Patna BS CET (Phase 2)", regStart: "Jul 01, 2026", regEnd: "Aug 15, 2026", examDate: "Sep 06, 2026", link: "iitp.ac.in" },
+    { id: 41, name: "IIT Patna BS CET (Phase 3)", regStart: "Oct 01, 2026", regEnd: "Nov 15, 2026", examDate: "Dec 06, 2026", link: "iitp.ac.in" },
+    { id: 42, name: "IIT Jodhpur BS CET (Phase 1)", regStart: "Apr 10, 2026", regEnd: "Jun 10, 2026", examDate: "Jun 28, 2026", link: "iitj.ac.in" },
+    { id: 43, name: "IIT Jodhpur BS CET (Phase 2)", regStart: "Jul 15, 2026", regEnd: "Sep 01, 2026", examDate: "Sep 20, 2026", link: "iitj.ac.in" },
+    { id: 44, name: "IIT Jodhpur BS CET (Phase 3)", regStart: "Oct 10, 2026", regEnd: "Nov 30, 2026", examDate: "Dec 20, 2026", link: "iitj.ac.in" }
+];
