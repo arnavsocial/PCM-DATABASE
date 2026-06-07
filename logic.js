@@ -56,6 +56,12 @@ window.useCollegeLogic = () => {
         return [...colleges].sort((a, b) => (b.popScore || 0) - (a.popScore || 0));
     };
 
+    const getCollegeRank = (colId, type) => {
+        const list = type === 'eng' ? engData : mgmtData;
+        const sorted = sortColleges(list);
+        return sorted.findIndex(item => item.id === colId) + 1;
+    };
+
     // --- IMPROVED EXAM SORTING LOGIC ---
     const getLiveStatus = (exam) => {
         const today = new Date(currentDate); 
@@ -168,6 +174,6 @@ window.useCollegeLogic = () => {
         updateEng, updateMgmt, updateExam,
         filterList, formatCurrency, formatPkg,
         sortColleges, getLiveStatus, sortExams,
-        downloadCSV
+        getCollegeRank, downloadCSV
     };
 };
