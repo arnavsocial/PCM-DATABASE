@@ -59,127 +59,159 @@
         .dark .hover\:bg-blue-50:hover { background-color: #374151 !important; }
         .dark .social-wrapper .icon { background: #3f4451; color: #fff; }
 
-        /* Neumorphic Card Base */
+        /* Flat 2D Card Base */
         .neu-card {
-            border-radius: 16px;
-            background: #e0e0e0;
-            box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
+            border-radius: 12px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
         }
         @media (min-width: 768px) {
-            .neu-card { border-radius: 30px; box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff; }
+            .neu-card { border-radius: 16px; }
         }
         .dark .neu-card {
-            background: #292c35;
-            box-shadow: 15px 15px 40px #1c1e24, -15px -15px 40px #363a46;
+            background: #1e2027;
+            border-color: #3f4451;
         }
 
         /* Animated Search Bar */
         .search-input {
-            border: 2px solid transparent; width: 100%; height: 2.5em; padding-left: 0.8em;
-            outline: none; overflow: hidden; background-color: #f3f3f3;
-            border-radius: 10px; transition: all 0.5s; font-family: inherit;
+            border: 2px solid #e2e8f0; width: 100%; height: 2.5em; padding-left: 0.8em;
+            outline: none; overflow: hidden; background-color: #f8fafc;
+            border-radius: 8px; transition: all 0.3s; font-family: inherit;
         }
         .search-input:hover, .search-input:focus {
-            border: 2px solid #4a9dec; box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+            border-color: #3b82f6;
             background-color: white;
         }
-        .dark .search-input { background-color: #3f4451; color: white; }
-        .dark .search-input:hover, .dark .search-input:focus { background-color: #1e2027; }
+        .dark .search-input { background-color: #3f4451; border-color: #4b5563; color: white; }
+        .dark .search-input:hover, .dark .search-input:focus { background-color: #1e2027; border-color: #3b82f6; }
 
-        /* Segmented Options Buttons (Neumorphic Tabs) */
-        .tab-btn {
-            font: inherit; background-color: #f0f0f0; border: 0; color: #242424;
-            font-size: 0.8rem; padding: 0.4em 0.8em; text-shadow: 0 0.0625em 0 #fff;
-            box-shadow: inset 0 0.0625em 0 0 #f4f4f4, 0 0.0625em 0 0 #efefef,
-                0 0.125em 0 0 #ececec, 0 0.25em 0 0 #e0e0e0, 0 0.3125em 0 0 #dedede,
-                0 0.375em 0 0 #dcdcdc, 0 0.425em 0 0 #cacaca, 0 0.425em 0.5em 0 #cecece;
-            transition: 0.23s ease; cursor: pointer; font-weight: bold; margin: -1px; white-space: nowrap;
+        /* Segmented Options Buttons (Unified Flat 2D Tabs) */
+        .tabs-wrapper {
+            display: flex;
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
         }
         @media (min-width: 768px) {
-            .tab-btn { font-size: 0.95rem; padding: 0.5em 1.5em; }
+            .tabs-wrapper {
+                width: auto;
+            }
         }
-        .tab-btn.left { border-top-left-radius: 0.5em; border-bottom-left-radius: 0.5em; }
-        .tab-btn.middle { border-radius: 0px; }
-        .tab-btn.right { border-top-right-radius: 0.5em; border-bottom-right-radius: 0.5em; }
-        .tab-btn:active, .tab-btn.active {
-            translate: 0 0.225em; letter-spacing: 0.05em; color: skyblue;
-            box-shadow: inset 0 0.03em 0 0 #f4f4f4, 0 0.03em 0 0 #efefef,
-                0 0.0625em 0 0 #ececec, 0 0.125em 0 0 #e0e0e0, 0 0.125em 0 0 #dedede,
-                0 0.2em 0 0 #dcdcdc, 0 0.225em 0 0 #cacaca, 0 0.225em 0.375em 0 #cecece;
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+            font: inherit;
+            background-color: #f1f5f9;
+            color: #475569;
+            font-size: 2.1vw; /* Fluid font sizing for mobile */
+            padding: 0.6em 0.3em;
+            border: 0;
+            border-right: 1px solid #cbd5e1;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        @media (min-width: 480px) {
+            .tab-btn {
+                font-size: 0.75rem;
+                padding: 0.6em 0.8em;
+            }
+        }
+        @media (min-width: 768px) {
+            .tab-btn {
+                flex: none;
+                font-size: 0.95rem;
+                padding: 0.6em 1.5em;
+            }
+        }
+        .tab-btn:last-child {
+            border-right: 0;
+        }
+        .tab-btn:hover { background-color: #e2e8f0; color: #1f2937; }
+        .tab-btn.active {
+            background-color: #3b82f6; color: white;
         }
 
-        /* Dark Mode Tab Overrides - matching 3D depth */
+        /* Dark Mode Tab Overrides */
+        .dark .tabs-wrapper {
+            border-color: #4b5563;
+        }
         .dark .tab-btn { 
-            background-color: #3f4451; color: #d1d5db; border: none; text-shadow: none;
-            box-shadow: inset 0 0.0625em 0 0 #4b5563, 0 0.0625em 0 0 #374151,
-                0 0.125em 0 0 #2d3748, 0 0.25em 0 0 #1f2937, 0 0.3125em 0 0 #111827,
-                0 0.375em 0 0 #0f172a, 0 0.425em 0 0 #020617, 0 0.425em 0.5em 0 #000000;
+            background-color: #2e3039; color: #d1d5db; border-right: 1px solid #4b5563;
         }
-        .dark .tab-btn:active, .dark .tab-btn.active { 
-            color: #60a5fa; translate: 0 0.225em; background-color: #3f4451;
-            box-shadow: inset 0 0.03em 0 0 #4b5563, 0 0.03em 0 0 #374151,
-                0 0.0625em 0 0 #2d3748, 0 0.125em 0 0 #1f2937, 0 0.125em 0 0 #111827,
-                0 0.2em 0 0 #0f172a, 0 0.225em 0 0 #020617, 0 0.225em 0.375em 0 #000000;
+        .dark .tab-btn:last-child {
+            border-right: 0;
+        }
+        .dark .tab-btn:hover {
+            background-color: #3f4451; color: white;
+        }
+        .dark .tab-btn.active { 
+            background-color: #3b82f6; color: white; border-right-color: #3b82f6;
         }
 
-        /* Animated Social Icons */
+        /* Animated Social Icons (Flat 2D Style) */
         .social-wrapper { display: inline-flex; list-style: none; gap: 8px; padding: 0; margin: 0; }
         @media (min-width: 768px) { .social-wrapper { gap: 12px; } }
         .social-wrapper .icon {
-            position: relative; background: #fff; border-radius: 50%; padding: 6px;
+            position: relative; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 50%; padding: 6px;
             width: 28px; height: 28px; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); cursor: pointer; text-decoration: none;
-            transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55); color: #333;
+            cursor: pointer; text-decoration: none;
+            transition: all 0.2s ease; color: #475569;
         }
         @media (min-width: 768px) {
             .social-wrapper .icon { width: 35px; height: 35px; padding: 8px; }
         }
         .social-wrapper .tooltip {
-            position: absolute; top: 0; font-size: 10px; background: #fff; color: #fff;
-            padding: 4px 6px; border-radius: 5px; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-            opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: absolute; top: 0; font-size: 10px; background: #1e293b; color: #fff;
+            padding: 4px 6px; border-radius: 5px;
+            opacity: 0; pointer-events: none; transition: all 0.2s ease;
             white-space: nowrap; z-index: 20;
         }
         @media (min-width: 768px) { .social-wrapper .tooltip { font-size: 12px; padding: 5px 8px; } }
         .social-wrapper .icon:hover .tooltip { top: -40px; opacity: 1; visibility: visible; pointer-events: auto; }
-        .social-wrapper .facebook:hover, .social-wrapper .facebook:hover .tooltip { background: #1877F2; color: #fff; }
-        .social-wrapper .twitter:hover, .social-wrapper .twitter:hover .tooltip { background: #1DA1F2; color: #fff; }
-        .social-wrapper .instagram:hover, .social-wrapper .instagram:hover .tooltip { background: #E4405F; color: #fff; }
-        .social-wrapper .github:hover, .social-wrapper .github:hover .tooltip { background: #333; color: #fff; }
+        .social-wrapper .instagram:hover, .social-wrapper .instagram:hover .tooltip { background: #E4405F; color: #fff; border-color: #E4405F; }
+        .social-wrapper .github:hover, .social-wrapper .github:hover .tooltip { background: #1e293b; color: #fff; border-color: #1e293b; }
+        .social-wrapper .snapchat:hover, .social-wrapper .snapchat:hover .tooltip { background: #FFFC00; color: #000; border-color: #FFFC00; }
+        .social-wrapper .gmail:hover, .social-wrapper .gmail:hover .tooltip { background: #EA4335; color: #fff; border-color: #EA4335; }
+        .dark .social-wrapper .icon { background: #2e3039; border-color: #4b5563; color: #d1d5db; }
+        .dark .social-wrapper .icon:hover { background: #3f4451; }
 
-        /* Top Action Buttons (Edit/CSV) */
+        /* Top Action Buttons (Flat 2D Style) */
         .action-btn {
             display: flex; align-items: center; gap: 4px; padding: 6px 12px;
-            border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 0.85rem;
-            transition: transform 0.2s, background 0.2s; background-color: #3b82f6; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid transparent; border-radius: 6px; color: white; font-weight: bold; cursor: pointer; font-size: 0.85rem;
+            transition: background-color 0.2s; background-color: #3b82f6;
         }
         @media (min-width: 768px) {
             .action-btn { padding: 8px 16px; font-size: 1rem; gap: 6px; }
         }
-        .action-btn:hover { transform: scale(1.05); }
+        .action-btn:hover { background-color: #2563eb; }
         .action-btn svg { width: 16px; height: 16px; fill: currentColor; }
         @media (min-width: 768px) { .action-btn svg { width: 18px; height: 18px; } }
         .action-btn.edit { background-color: #f59e0b; color: #fff; }
+        .action-btn.edit:hover { background-color: #d97706; }
         .action-btn.download { background-color: #10b981; }
+        .action-btn.download:hover { background-color: #059669; }
 
-        /* New Animated Apply Now Button */
+        /* Apply Now Button (Flat 2D Style) */
         .apply-btn {
             position: relative;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s ease;
             padding-block: 0.5rem;
             padding-inline: 1rem;
-            background-color: rgb(0 107 179);
+            background-color: #006bb3;
             border-radius: 9999px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: #ffff;
+            color: #ffffff;
             gap: 8px;
             font-weight: bold;
-            border: 3px solid #ffffff4d;
+            border: 1px solid transparent;
             outline: none;
-            overflow: hidden;
             font-size: 0.75rem;
             cursor: pointer;
             text-decoration: none;
@@ -196,7 +228,7 @@
         .apply-btn .icon {
             width: 16px;
             height: 16px;
-            transition: all 0.3s ease-in-out;
+            transition: transform 0.2s ease;
             fill: currentColor;
         }
         @media (min-width: 768px) { 
@@ -207,39 +239,12 @@
         }
 
         .apply-btn:hover {
-            transform: scale(1.05);
-            border-color: #fff9;
+            background-color: #00558f;
             color: white;
         }
 
         .apply-btn:hover .icon {
             transform: translate(4px);
-        }
-
-        .apply-btn:hover::before {
-            animation: shine 1.5s ease-out infinite;
-        }
-
-        .apply-btn::before {
-            content: "";
-            position: absolute;
-            width: 100px;
-            height: 100%;
-            background-image: linear-gradient(
-                120deg,
-                rgba(255, 255, 255, 0) 30%,
-                rgba(255, 255, 255, 0.8),
-                rgba(255, 255, 255, 0) 70%
-            );
-            top: 0;
-            left: -100px;
-            opacity: 0.6;
-        }
-
-        @keyframes shine {
-            0% { left: -100px; }
-            60% { left: 100%; }
-            to { left: 100%; }
         }
 
         /* Utils */
@@ -251,6 +256,8 @@
 <body id="main-body" class="bg-gray-100">
     <div id="root"></div>
 
+
+
     <script src="engData.js"></script>
     <script src="mgmtData.js"></script>
     <script src="engExams.js"></script>
@@ -261,6 +268,8 @@
 
     <script type="text/babel">
         const { useState, useEffect } = React;
+
+
 
         // --- ICONS ---
         const IconEdit = () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>;
@@ -276,7 +285,7 @@
                 isEditMode, setIsEditMode, currentDate,
                 engData, mgmtData, engExamData, mgmtExamData, otherExamData,
                 updateEng, updateMgmt, updateExam, filterList, formatCurrency, formatPkg, 
-                sortColleges, sortExams, getLiveStatus, downloadCSV
+                sortColleges, sortExams, getLiveStatus, getCollegeRank, downloadCSV
             } = window.useCollegeLogic(); 
 
             const [isDark, setIsDark] = useState(false);
@@ -287,8 +296,8 @@
                 else body.classList.remove('dark');
             }, [isDark]);
 
-            const renderCollegeTable = (data, updateFunc) => (
-                <div className="overflow-x-auto min-h-[500px] hide-scroll">
+            const renderCollegeTable = (data, updateFunc, type) => (
+                <div className="overflow-x-auto min-h-[500px]">
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-gray-50 text-[10px] md:text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
@@ -318,19 +327,19 @@
                         <tbody className="text-xs md:text-sm divide-y divide-gray-100">
                             {data.length === 0 ? (
                                 <tr><td colSpan="9" className="text-center p-8 text-gray-500">No data loaded or empty. Check data files.</td></tr>
-                            ) : sortColleges(filterList(data)).map((col, index) => (
+                            ) : sortColleges(filterList(data)).map((col) => (
                                 <tr key={col.id} className="hover:bg-blue-50 transition-colors duration-150 bg-white">
-                                    <td className="p-2 md:p-4 font-medium text-gray-500 sticky left-0 z-10 sticky-col-shadow md:shadow-none bg-white">{index + 1}</td>
-                                    <td className="p-2 md:p-4">
-                                        <div className="font-bold text-gray-900">
-                                            {isEditMode ? <input className="edit-input" value={col.name || ''} onChange={e => updateFunc(col.id, 'name', e.target.value)} /> : col.name}
-                                        </div>
-                                    </td>
-                                    <td className="p-2 md:p-4">
-                                        <div className="font-semibold text-blue-600">
-                                            {isEditMode ? <input className="edit-input" value={col.entrance || ''} onChange={e => updateFunc(col.id, 'entrance', e.target.value)} /> : col.entrance}
-                                        </div>
-                                    </td>
+                                    <td className="p-2 md:p-4 font-medium text-gray-500 sticky left-0 z-10 sticky-col-shadow md:shadow-none bg-white">{getCollegeRank(col.id, type)}</td>
+                                            <td className="p-2 md:p-4">
+                                                <div className="font-bold text-gray-900">
+                                                    {isEditMode ? <input className="edit-input" value={col.name || ''} onChange={e => updateFunc(col.id, 'name', e.target.value)} /> : col.name}
+                                                </div>
+                                            </td>
+                                            <td className="p-2 md:p-4">
+                                                <div className="font-semibold text-blue-600">
+                                                    {isEditMode ? <input className="edit-input" value={col.entrance || ''} onChange={e => updateFunc(col.id, 'entrance', e.target.value)} /> : col.entrance}
+                                                </div>
+                                            </td>
                                     <td className="p-2 md:p-4 text-right font-medium text-red-500 whitespace-nowrap">
                                         {isEditMode ? <input className="edit-input text-right" value={col.fees || ''} onChange={e => updateFunc(col.id, 'fees', e.target.value)} /> : formatCurrency(col.fees)}
                                     </td>
@@ -357,7 +366,7 @@
                 const sorted = sortExams(filtered);
                 
                 return (
-                    <div className="overflow-x-auto min-h-[500px] hide-scroll">
+                    <div className="overflow-x-auto min-h-[500px]">
                         <table className="w-full text-left border-collapse">
                             <thead>
                                 <tr className="bg-gray-50 text-[10px] md:text-xs uppercase tracking-wider text-gray-600 border-b-2 border-gray-200">
@@ -428,8 +437,8 @@
             };
 
             return (
-                <div className="min-h-screen p-2 md:p-8 flex justify-center items-start">
-                    <div className="w-full max-w-7xl neu-card overflow-hidden !p-0 flex flex-col">
+                <div className="min-h-screen flex flex-col bg-white">
+                    <div className="w-full flex-grow flex flex-col">
                         
                         {/* Header Area */}
                         <div className="p-4 md:p-8 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
@@ -439,7 +448,7 @@
                                 <IconBuilding className="text-blue-500 w-6 h-6 md:w-8 md:h-8" />
                                 <div className="text-center md:text-left">
                                     <h1 className="text-xl md:text-3xl font-bold text-gray-800 tracking-wide">College Database</h1>
-                                    <p className="text-gray-500 text-xs md:text-sm mt-0.5 md:mt-1">Top Private Colleges & Exams</p>
+                                    <p className="text-gray-500 text-xs md:text-sm mt-0.5 md:mt-1">Top Private Colleges & Exams by ARNAV</p>
                                 </div>
                             </div>
 
@@ -457,21 +466,22 @@
 
                                 {/* Social Icons */}
                                 <ul className="social-wrapper">
-                                    <a href="https://www.github.com" target="_blank" rel="noreferrer" className="icon github">
+                                    <a href="https://github.com/arnavsocial" target="_blank" rel="noreferrer" className="icon github">
                                         <span className="tooltip">GitHub</span>
                                         <svg viewBox="0 0 24 24" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.011-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.218.694.825.576C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12"/></svg>
                                     </a>
+                                    <a href="https://www.instagram.com/arnavsocial" target="_blank" rel="noreferrer" className="icon instagram">
+                                        <span className="tooltip">Instagram</span>
+                                        <svg viewBox="0 0 24 24" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                                    </a>
+
+                                    <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJNqskFnvlGNVCTPKlMnxSmRzdxCVdBHmrwKkGPTcJnRKfxTgXjqCFNTBMTSVNNJGMDJzfg" target="_blank" rel="noreferrer" className="icon gmail">
+                                        <span className="tooltip">Gmail</span>
+                                        <svg viewBox="0 0 24 24" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.733 1.634-1.636 1.634h-3.818V11.73L12 16.64l-6.545-4.91v9.27H1.636A1.637 1.637 0 0 1 0 19.366V5.457c0-1.298 1.458-2.062 2.527-1.26L12 11.23l9.473-7.033c1.07-.802 2.527-.038 2.527 1.26z"/></svg>
+                                    </a>
                                 </ul>
 
-                                {/* Action Buttons */}
-                                <div className="flex gap-2">
-                                    <button onClick={() => setIsEditMode(!isEditMode)} className={`action-btn ${isEditMode ? 'edit' : ''}`}>
-                                        {isEditMode ? <><IconCheck /> <span className="hidden md:inline">Done</span></> : <><IconEdit /> <span className="hidden md:inline">Edit</span></>}
-                                    </button>
-                                    <button onClick={downloadCSV} className="action-btn download">
-                                        <IconDownload /> <span className="hidden md:inline">CSV</span>
-                                    </button>
-                                </div>
+
                             </div>
                         </div>
 
@@ -479,20 +489,20 @@
                         <div className="px-4 md:px-8 pb-4 md:pb-6 flex flex-col-reverse md:flex-row justify-between items-center gap-4">
                             
                             {/* Segmented Tabs Data-Bound Controls */}
-                            <div className="flex w-full md:w-auto overflow-x-auto overflow-y-hidden hide-scroll py-2 pl-1 snap-x">
-                                <button onClick={() => setActiveTab('eng')} className={`tab-btn left snap-start ${activeTab==='eng' ? 'active' : ''}`}>
+                            <div className="tabs-wrapper py-0">
+                                <button onClick={() => setActiveTab('eng')} className={`tab-btn ${activeTab==='eng' ? 'active' : ''}`}>
                                     <span className="md:hidden">Engg</span><span className="hidden md:inline">Engineering</span>
                                 </button>
-                                <button onClick={() => setActiveTab('mgmt')} className={`tab-btn middle snap-start ${activeTab==='mgmt' ? 'active' : ''}`}>
+                                <button onClick={() => setActiveTab('mgmt')} className={`tab-btn ${activeTab==='mgmt' ? 'active' : ''}`}>
                                     <span className="md:hidden">Mgmt</span><span className="hidden md:inline">Management</span>
                                 </button>
-                                <button onClick={() => setActiveTab('examEng')} className={`tab-btn middle snap-start ${activeTab==='examEng' ? 'active' : ''}`}>
+                                <button onClick={() => setActiveTab('examEng')} className={`tab-btn ${activeTab==='examEng' ? 'active' : ''}`}>
                                     <span className="md:hidden">Eng Exams</span><span className="hidden md:inline">Eng Exams</span>
                                 </button>
-                                <button onClick={() => setActiveTab('examMgmt')} className={`tab-btn middle snap-start ${activeTab==='examMgmt' ? 'active' : ''}`}>
+                                <button onClick={() => setActiveTab('examMgmt')} className={`tab-btn ${activeTab==='examMgmt' ? 'active' : ''}`}>
                                     <span className="md:hidden">Mgmt Exams</span><span className="hidden md:inline">Mgmt Exams</span>
                                 </button>
-                                <button onClick={() => setActiveTab('examOther')} className={`tab-btn right snap-start ${activeTab==='examOther' ? 'active' : ''}`}>
+                                <button onClick={() => setActiveTab('examOther')} className={`tab-btn ${activeTab==='examOther' ? 'active' : ''}`}>
                                     <span className="md:hidden">Others</span><span className="hidden md:inline">Other Exams</span>
                                 </button>
                             </div>
@@ -512,8 +522,8 @@
 
                         {/* Display Canvas linked to correct Data constants */}
                         <div className="bg-white border-t border-gray-200 flex-grow">
-                            {activeTab === 'eng' && renderCollegeTable(engData, updateEng)}
-                            {activeTab === 'mgmt' && renderCollegeTable(mgmtData, updateMgmt)}
+                            {activeTab === 'eng' && renderCollegeTable(engData, updateEng, 'eng')}
+                            {activeTab === 'mgmt' && renderCollegeTable(mgmtData, updateMgmt, 'mgmt')}
                             {activeTab === 'examEng' && renderExamTable(engExamData, 'eng')}
                             {activeTab === 'examMgmt' && renderExamTable(mgmtExamData, 'mgmt')}
                             {activeTab === 'examOther' && renderExamTable(otherExamData, 'other')}
